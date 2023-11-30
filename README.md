@@ -1,7 +1,7 @@
 # iadc_dataset_tools
 
 ### Download
-1. Please visit [FusionPortable dataset](https://ram-lab.com/file/site/fusionportable/dataset/fusionportable) to check and download data.
+1. Please visit [FusionPortable dataset](https://fusionportable.github.io/dataset/fusionportable) to check and download data.
 2. Download the compressed rosbag.
 3. When finished, use the similar command ```7z e 20220216_garden_day.7z``` to extract data.
 
