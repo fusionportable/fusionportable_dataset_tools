@@ -51,8 +51,8 @@ class Camera():
             nsec = msg.header.stamp.nsecs
             timestamps.append((sec, nsec))
             frame_cnt += 1
-        timestamp_fiilename = os.path.join(output_path, 'timestamps.txt')
-        with open(timestamp_fiilename, 'w') as file:
+        timestamp_filename = os.path.join(output_path, 'timestamps.txt')
+        with open(timestamp_filename, 'w') as file:
             for time in timestamps:
                 file.write('{}.{:09d}\n'.format(time[0], time[1]))
         return len(timestamps)

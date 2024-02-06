@@ -27,11 +27,14 @@ WIDTH {len(structured_arr)}
 HEIGHT 1
 VIEWPOINT 0 0 0 1 0 0 0
 POINTS {len(structured_arr)}
-DATA ascii"""
+DATA ascii
+"""
             for field in fields:
                 structured_arr[field] = cloud_arr[field]
             return pcd_header, structured_arr
         elif self.sensor_type == 'ouster':
+            if cloud_arr.ndim == 1: # to address the point cloud with the size (N, )
+                cloud_arr = np.expand_dims(cloud_arr, axis=1)
             point_arr = cloud_arr.flatten()
             fields = ['x', 'y', 'z', 'intensity', 't', 'reflectivity', 'ring', 'ambient', 'range']  
             structured_arr = np.zeros(point_arr.shape[0], dtype={'names': fields, 'formats': ['f4', 'f4', 'f4', 'f8', 'i4', 'i4', 'i4', 'i4', 'i4']})
@@ -45,7 +48,8 @@ WIDTH {cloud_arr.shape[1]}
 HEIGHT {cloud_arr.shape[0]}
 VIEWPOINT 0 0 0 1 0 0 0
 POINTS {len(structured_arr)}
-DATA ascii"""
+DATA ascii
+"""
             for field in fields:
                 structured_arr[field] = point_arr[field]
             return pcd_header, structured_arr
@@ -63,8 +67,8 @@ DATA ascii"""
             nsec = msg.header.stamp.nsecs
             timestamps.append((sec, nsec))
             frame_cnt += 1
-        timestamp_fiilename = os.path.join(output_path, 'timestamps.txt')
-        with open(timestamp_fiilename, 'w') as file:
+        timestamp_filename = os.path.join(output_path, 'timestamps.txt')
+        with open(timestamp_filename, 'w') as file:
             for time in timestamps:
                 file.write('{}.{:09d}\n'.format(time[0], time[1]))
         return len(timestamps)
@@ -79,10 +83,10 @@ DATA ascii"""
 if __name__ == '__main__':
     print('[Test] Loading Ouster messages...')
     ouster = Lidar(sensor_type='ouster')
-    bag = rosbag.Bag('/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_campus00/vehicle_campus00_refined_test.bag')
+    bag = rosbag.Bag('/Rocket_ssd/dataset/FusionPortable_dataset_develop/r3live_result/vehicle_highway00_r3live_test.bag')
     ouster.load_messages_write_to_file(bag=bag, \
-                                       output_path='/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_campus00/raw_data/ouster/points', \
-                                       topic='/os_cloud_node/points')
+                                       output_path='/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_highway00/r3live_result/ouster00_undistorted/points', \
+                                       topic='/r3live/cloud_nonregistered_raw')
 
 
 

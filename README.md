@@ -38,4 +38,4 @@ def get_xyz_points(cloud_array, remove_nans=True, dtype=np.float64):
 ```
 
 ### Inquiry
-Please feel free to contact Dr.Jianhao Jiao (jiaojh1994@gmail.com) or Mr.Hexiang Wei (xx) if you have any questions.
+Please feel free to contact Dr.Jianhao Jiao (jiaojh1994 at gmail.com) or Mr.Hexiang Wei (hweiak at connect.ust.hk) if you have any questions.
