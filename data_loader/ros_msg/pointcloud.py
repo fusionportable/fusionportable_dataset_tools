@@ -5,7 +5,7 @@ import numpy as np
 
 import os
 
-class Lidar():
+class PointCloud():
     def __init__(self, sensor_type='vlp'):
         self.sensor_type = sensor_type
         
@@ -82,7 +82,7 @@ DATA ascii
 
 if __name__ == '__main__':
     print('[Test] Loading Ouster messages...')
-    ouster = Lidar(sensor_type='ouster')
+    ouster = PointCloud(sensor_type='ouster')
     bag = rosbag.Bag('/Rocket_ssd/dataset/FusionPortable_dataset_develop/r3live_result/vehicle_highway00_r3live_test.bag')
     ouster.load_messages_write_to_file(bag=bag, \
                                        output_path='/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_highway00/r3live_result/ouster00_undistorted/points', \
