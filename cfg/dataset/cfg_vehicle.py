@@ -12,8 +12,10 @@ dataset_sensor_frameid_dict = {
   'event_left_imu': ['event_cam00_imu'],
   'event_right_camera': ['event_cam01'],
   'event_right_imu': ['event_cam01_imu'],
-  'frame_left_camera': ['vehicle_frame_cam00'],
-  'frame_right_camera': ['vehicle_frame_cam01'],
+  'frame_left_camera': ['frame_cam00'],
+  'frame_right_camera': ['frame_cam01'],
+  'vehicle_frame_left_camera': ['vehicle_frame_cam00'],
+  'vehicle_frame_right_camera': ['vehicle_frame_cam01'],
   'stim300_imu': ['body_imu']
 }
 
@@ -55,13 +57,13 @@ dataset_rostopic_msg_frameid_dict = {
   'event_right_image': ['/stereo/davis_right/image_raw/compressed', 'sensor_msgs/CompressedImage', 'event_cam01'],
   'event_right_imu': ['/stereo/davis_right/imu/data_raw', 'sensor_msgs/Imu', 'event_cam01_imu'],
   # 
-  'frame_left_camera_info': ['/stereo/vehicle_frame_left/camera_info', 'sensor_msgs/CameraInfo', 'frame_cam00'],
-  'frame_left_image_chunk_data': ['/stereo/vehicle_frame_left/image_chunk_data', 'geometry_msgs/PointStamped', 'frame_cam00'],
-  'frame_left_image': ['/stereo/vehicle_frame_left/image_raw/compressed', 'sensor_msgs/CompressedImage', 'frame_cam00'],
+  'vehicle_frame_left_camera_info': ['/stereo/vehicle_frame_left/camera_info', 'sensor_msgs/CameraInfo', 'frame_cam00'],
+  'vehicle_frame_left_image_chunk_data': ['/stereo/vehicle_frame_left/image_chunk_data', 'geometry_msgs/PointStamped', 'frame_cam00'],
+  'vehicle_frame_left_image': ['/stereo/vehicle_frame_left/image_raw/compressed', 'sensor_msgs/CompressedImage', 'frame_cam00'],
   # 
-  'frame_right_camera_info': ['/stereo/vehicle_frame_right/camera_info', 'sensor_msgs/CameraInfo', 'frame_cam01'],
-  'frame_right_image_chunk_data': ['/stereo/vehicle_frame_right/image_chunk_data', 'geometry_msgs/PointStamped', 'frame_cam01'],
-  'frame_right_image': ['/stereo/vehicle_frame_right/image_raw/compressed', 'sensor_msgs/CompressedImage', 'frame_cam01'],
+  'vehicle_frame_right_camera_info': ['/stereo/vehicle_frame_right/camera_info', 'sensor_msgs/CameraInfo', 'frame_cam01'],
+  'vehicle_frame_right_image_chunk_data': ['/stereo/vehicle_frame_right/image_chunk_data', 'geometry_msgs/PointStamped', 'frame_cam01'],
+  'vehicle_frame_right_image': ['/stereo/vehicle_frame_right/image_raw/compressed', 'sensor_msgs/CompressedImage', 'frame_cam01'],
   # 
   'stim300_imu': ['/stim300/imu/data_raw', 'sensor_msgs/Imu', 'body_imu'],
   'tf_static': ['/tf_static', 'tf2_msgs/TFMessage', 'none']
