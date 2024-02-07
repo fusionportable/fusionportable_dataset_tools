@@ -14,27 +14,31 @@ Clone the Repo
 git clone https://github.com/HKUSTGZ-IADC/iadc_dataset_tools.git
 cd iadc_dataset_tools
 ```
-Setup the Python environment (tested on Python-3.9), or using Anaconda
+Setup the Python environment (tested on Python-3.9) or using Anaconda directly and run
 ```
 conda create -n fp_dataset python=3.9
 pip install -r requirements
 ```
 
 ### Usage
-```write_bag_to_data.ipynb```
-Convert the raw rosbag into individual files
-```write_alg_bag_to_data.ipynb```
-Convert the algorithms' results (i.e., R3LIVE) stored as the rosbag into individual files
+#### 1. ```write_bag_to_data.ipynb```
+Description: Convert the raw rosbag into individual files
+
+#### 2. ```write_data_to_kitti360.ipynb```
+Description: Convert the raw files into the KITTI-360 format
+
+#### 3. ```write_alg_bag_to_data.ipynb```
+Description: Convert the algorithms' results (i.e., R3LIVE) stored as the rosbag into individual files
 
 ### Some Issues with Dependencies
-1. Something wrong with the ```ros_numpy```
+##### 1. Something wrong with the ```ros_numpy```
 ```python
 File ~/anaconda3/envs/fp_dataset/lib/python3.9/site-packages/ros_numpy/point_cloud2.py:224
     221             new_cloud_arr[field_name] = cloud_arr[field_name]
 ...
 AttributeError: module 'numpy' has no attribute 'float'.
 ```
-Please goto ```~/anaconda3/envs/fp_dataset/lib/python3.9/site-packages/ros_numpy/point_cloud2.py:224``` and replace the original line with
+*Solution:* Please goto ```~/anaconda3/envs/fp_dataset/lib/python3.9/site-packages/ros_numpy/point_cloud2.py:224``` and replace the original line with
 ```python
 def get_xyz_points(cloud_array, remove_nans=True, dtype=np.float64):
 ```
