@@ -1,7 +1,7 @@
 import os
 import io
 
-class Sensor():
+class BasicMessage():
     def __init__(self):
         pass
 

@@ -6,7 +6,7 @@ import rosbag
 import numpy as np
 from PIL import Image as PILImage
 
-class Camera():
+class Image():
     def __init__(self, sensor_type='frame_cam', msg_type='sensor_msgs/Image'):
         self.sensor_type = sensor_type
         self.msg_type = msg_type
@@ -63,7 +63,7 @@ class Camera():
 
 if __name__ == '__main__':
     print('[Test] Loading Outser messages...')
-    ouster_nearir_image = Camera(sensor_type='ouster', msg_type='sensor_msgs/Image')
+    ouster_nearir_image = Image(sensor_type='ouster', msg_type='sensor_msgs/Image')
     bag = rosbag.Bag('/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_campus00/vehicle_campus00_refined_test.bag')
     ouster_nearir_image.load_messages_write_to_file(bag=bag, \
                                                     output_path='/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_campus00/raw_data/ouster/nearir_image', \
