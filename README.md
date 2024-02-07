@@ -1,4 +1,4 @@
-# FusionPortable_dataset_tooles
+# FusionPortable_dataset_tools
 
 ### Download
 1. Please visit [FusionPortable dataset](https://fusionportable.github.io/dataset/fusionportable) to check and download data.
