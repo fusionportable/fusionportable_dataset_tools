@@ -24,8 +24,8 @@ pip install -r requirements
 #### 1. ```write_bag_to_data.ipynb```
 Description: Convert the raw rosbag into individual files
 
-#### 2. ```write_data_to_kitti360.ipynb```
-Description: Convert the raw files into the KITTI-360 format
+#### 2. ```write_data_to_kitti.ipynb```
+Description: Convert the raw files into the KITTI format (for perception purpose)
 
 #### 3. ```write_alg_bag_to_data.ipynb```
 Description: Convert the algorithms' results (i.e., R3LIVE) stored as the rosbag into individual files
