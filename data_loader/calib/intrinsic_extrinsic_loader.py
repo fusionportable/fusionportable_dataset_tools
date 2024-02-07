@@ -32,48 +32,61 @@ class IntrinsicExtrinsicLoader():
 		for sensor, value in sensor_frameid_dict.items():
 			frame_id = value[0]
 			yaml_path = os.path.join(calib_path, frame_id + '.yaml')
-			print('Loading Intrinsic Extrinsics from {:<20} ...'.format(yaml_path))
-			if 'ouster' in sensor:
+			if 'ouster' in sensor and not 'imu' in sensor:
+				print('Loading Intrinsic Extrinsics from {:<20} ...'.format(yaml_path))
 				self.load_lidar(sensor, frame_id, yaml_path)
 			elif 'frame' in sensor:
+				print('Loading Intrinsic Extrinsics from {:<20} ...'.format(yaml_path))
 				self.load_frame_camera(sensor, frame_id, yaml_path)
-			elif ('event' in sensor) and ('camera' in sensor):
+			elif 'event' in sensor and 'camera' in sensor:
+				print('Loading Intrinsic Extrinsics from {:<20} ...'.format(yaml_path))
 				self.load_event_camera(sensor, frame_id, yaml_path)
 			else:
-				print('Unknown sensor: {:<20}'.format(sensor))
+				if self.is_print:
+					print('Unknown sensor: {:<20}'.format(sensor))
 		
 		if self.is_print:
 			print('Sensors:')
-			print(self.sensor_collection)
+			for sensor in self.sensor_collection.keys():
+				print('Sensor: {}'.format(sensor))
+				print(self.sensor_collection[sensor])
+
 			print('Extrinsics:')
-			print(self.extrinsics_collection)
+			for frame_id, links in self.extrinsics_collection.items():
+				if len(links) > 0:
+					print('Frame id: {}'.format(frame_id))
+					for child_frame_id, tf_matrix in links.items():
+						print('      {} - {}:'.format(frame_id, child_frame_id))
+						print('{}'.format(tf_matrix))
 			
 	def load_lidar(self, sensor, frame_id, yaml_path):
 		with open(yaml_path, 'r') as yaml_file:
 			yaml_data = yaml.safe_load(yaml_file)
 
-			if 'sensor_frame_cam00' in yaml_data:
+			lidar_name = yaml_data['lidar_name']
+
+			if 'translation_sensor_frame_cam00' in yaml_data.keys():
 				translation = np.array(yaml_data['translation_sensor_frame_cam00']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_frame_cam00']['data'])
 				T_sensor_framecam00 = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.extrinsics_collection[frame_id]['frame_cam00'] = T_sensor_framecam00
 				self.extrinsics_collection['frame_cam00'][frame_id] = np.linalg.inv(T_sensor_framecam00)
 
-			if 'sensor_vehicle_frame_cam00' in yaml_data:
+			if 'translation_sensor_vehicle_frame_cam00' in yaml_data:
 				translation = np.array(yaml_data['translation_sensor_vehicle_frame_cam00']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_vehicle_frame_cam00']['data'])
 				T_sensor_framecam00 = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.extrinsics_collection[frame_id]['vehicle_frame_cam00'] = T_sensor_framecam00
 				self.extrinsics_collection['vehicle_frame_cam00'][frame_id] = np.linalg.inv(T_sensor_framecam00)
 
-			if 'sensor_event_cam00' in yaml_data:
+			if 'translation_sensor_event_cam00' in yaml_data:
 				translation = np.array(yaml_data['translation_sensor_event_cam00']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_event_cam00']['data'])
 				T_sensor_eventcam00 = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.extrinsics_collection[frame_id]['event_cam00'] = T_sensor_eventcam00
 				self.extrinsics_collection['event_cam00'][frame_id] = np.linalg.inv(T_sensor_eventcam00)   
 				
-			lidar = Lidar()
+			lidar = Lidar(lidar_name)
 			if self.is_print:
 				print(lidar)
 			self.sensor_collection[sensor] = lidar
@@ -126,8 +139,6 @@ class IntrinsicExtrinsicLoader():
 			
 			translation = np.array(yaml_data['translation_stereo']['data'])
 			quaternion = np.array(yaml_data['quaternion_stereo']['data'])
-			print(quaternion)
-			print(quaternion[[1, 2, 3, 0]])
 			T_stereo = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 
 			translation = np.array(yaml_data['translation_sensor_body_imu']['data'])
@@ -153,6 +164,5 @@ if __name__ == "__main__":
 	sys.path.append('cfg')
 	from dataset.cfg_vehicle import dataset_sensor_frameid_dict
 	int_ext_loader = IntrinsicExtrinsicLoader(is_print=True)
-																						
 	int_ext_loader.load_calibration(calib_path='/Titan/dataset/FusionPortable_dataset_develop/calibration_files/20230618_calib/calib', \
 																	sensor_frameid_dict=dataset_sensor_frameid_dict)

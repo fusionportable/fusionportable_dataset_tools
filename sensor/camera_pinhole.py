@@ -16,7 +16,7 @@ class CameraPinhole():
     self.T_stereo = T_stereo
 
   def __str__(self):
-    return 'Camera Intrinsics:\nWidth:{}\nHeight:{}\nK:\n{}\nP:\n{}\nRect:\n{}\n'.format(self.width, self.height, self.K, self.P, self.Rect)
+    return '{} Intrinsics:\nWidth:{}\nHeight:{}\nK:\n{}\nP:\n{}\nRect:\n{}\n'.format(self.camera_name, self.width, self.height, self.K, self.P, self.Rect)
 
   def vector_from_image_plane_coordinates(self, u_C):
     return np.linalg.inv(self.K) @ np.array([[u_C[0]], [u_C[1]], [1.0]])
