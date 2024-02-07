@@ -21,8 +21,10 @@ pip install -r requirements
 ```
 
 ### Usage
-1. Open the ```write_rosbag_to_files.ipynb``` and ```run all``` to convert the rosbag into individual raw files
-
+```write_bag_to_data.ipynb```
+Convert the raw rosbag into individual files
+```write_alg_bag_to_data.ipynb```
+Convert the algorithms' results (i.e., R3LIVE) stored as the rosbag into individual files
 
 ### Some Issues with Dependencies
 1. Something wrong with the ```ros_numpy```
