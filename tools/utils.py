@@ -1,3 +1,5 @@
+import numpy as np
+
 def find_closest_element_sorted(sorted_array, target):
   """
   Finds the closest element to the target in a sorted array.
@@ -21,7 +23,7 @@ def find_closest_element_sorted(sorted_array, target):
       mid = (left + right) // 2
       # If target is found
       if sorted_array[mid] == target:
-          return sorted_array[mid]
+          return sorted_array[mid], mid
       # Narrowing down the search range
       if target < sorted_array[mid]:
           right = mid - 1
@@ -36,8 +38,7 @@ def find_closest_element_sorted(sorted_array, target):
       return sorted_array[left], left
 
 if __name__ == '__main__':
-  sorted_array = [1, 2, 4, 5, 6, 8, 9]
   target = 10
-
+  sorted_array = [1, 2, 4, 5, 6, 8, 9]
   closest_element, closest_id = find_closest_element_sorted(sorted_array, target)
   print(f"The closest element to {target} in the array is {closest_element} - id: {closest_id}.")

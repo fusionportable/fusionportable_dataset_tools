@@ -7,6 +7,7 @@ import yaml
 
 sys.path.append('tools')
 import eigen_conversion 
+import tf_graph
 
 sys.path.append('sensor')
 from camera_pinhole import CameraPinhole
@@ -18,14 +19,12 @@ class IntrinsicExtrinsicLoader():
 	def __init__(self, is_print=False):
 		self.is_print = is_print
 		self.sensor_collection = {}
-		self.extrinsics_collection = {}
+		self.tf_graph = tf_graph.TFGraph()
 
 	def load_calibration(self, calib_path, sensor_frameid_dict):
 		# Initialize sensor extrinsics object
-		self.extrinsics_collection = {} # extrinsics_collection['ouster00']
-		for sensor, value in sensor_frameid_dict.items():
-			frame_id = value[0]
-			self.extrinsics_collection[frame_id] = {}
+		for _, value in sensor_frameid_dict.items():
+			self.tf_graph.add_node(frame_id=value[0])
 
 		# Initialize sensor collection object
 		self.sensor_collection = {} # sensor_collection['ouster']
@@ -68,23 +67,20 @@ class IntrinsicExtrinsicLoader():
 			if 'translation_sensor_frame_cam00' in yaml_data.keys():
 				translation = np.array(yaml_data['translation_sensor_frame_cam00']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_frame_cam00']['data'])
-				T_sensor_framecam00 = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
-				self.extrinsics_collection[frame_id]['frame_cam00'] = T_sensor_framecam00
-				self.extrinsics_collection['frame_cam00'][frame_id] = np.linalg.inv(T_sensor_framecam00)
+				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+				self.tf_graph.connect_nodes(frame_id, 'frame_cam00', tf)
 
 			if 'translation_sensor_vehicle_frame_cam00' in yaml_data:
 				translation = np.array(yaml_data['translation_sensor_vehicle_frame_cam00']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_vehicle_frame_cam00']['data'])
-				T_sensor_framecam00 = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
-				self.extrinsics_collection[frame_id]['vehicle_frame_cam00'] = T_sensor_framecam00
-				self.extrinsics_collection['vehicle_frame_cam00'][frame_id] = np.linalg.inv(T_sensor_framecam00)
+				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+				self.tf_graph.connect_nodes(frame_id, 'vehicle_frame_cam00', tf)
 
 			if 'translation_sensor_event_cam00' in yaml_data:
 				translation = np.array(yaml_data['translation_sensor_event_cam00']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_event_cam00']['data'])
-				T_sensor_eventcam00 = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
-				self.extrinsics_collection[frame_id]['event_cam00'] = T_sensor_eventcam00
-				self.extrinsics_collection['event_cam00'][frame_id] = np.linalg.inv(T_sensor_eventcam00)   
+				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+				self.tf_graph.connect_nodes(frame_id, 'event_cam00', tf)
 				
 			lidar = Lidar(lidar_name)
 			if self.is_print:
@@ -98,24 +94,21 @@ class IntrinsicExtrinsicLoader():
 
 			camera_name = yaml_data['camera_name']
 			distortion_model = yaml_data['distortion_model']
-
 			width = yaml_data['image_width']
 			height = yaml_data['image_height']
 			K = np.array(yaml_data['camera_matrix']['data']).reshape(3, 3)
 			D = np.array(yaml_data['distortion_coefficients']['data']).reshape(1, 5)
 			Rect = np.array(yaml_data['rectification_matrix']['data']).reshape(3, 3)
 			P = np.array(yaml_data['projection_matrix']['data']).reshape(3, 4)
-			
 			translation = np.array(yaml_data['translation_stereo']['data'])
 			quaternion = np.array(yaml_data['quaternion_stereo']['data'])
 			T_stereo = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 
-			if 'sensor_body_imu' in yaml_data:
+			if 'translation_sensor_body_imu' in yaml_data:
 				translation = np.array(yaml_data['translation_sensor_body_imu']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_body_imu']['data'])
-				T_sensor_bodyimu = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
-				self.extrinsics_collection[frame_id]['body_imu'] = T_sensor_bodyimu
-				self.extrinsics_collection['body_imu'][frame_id] = np.linalg.inv(T_sensor_bodyimu)
+				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+				self.tf_graph.connect_nodes(frame_id, 'body_imu', tf)
 
 			camera = CameraPinhole(width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
 			if self.is_print:
@@ -129,31 +122,28 @@ class IntrinsicExtrinsicLoader():
 
 			camera_name = yaml_data['camera_name']
 			distortion_model = yaml_data['distortion_model']
-
 			width = yaml_data['image_width']
 			height = yaml_data['image_height']
 			K = np.array(yaml_data['camera_matrix']['data']).reshape(3, 3)
 			D = np.array(yaml_data['distortion_coefficients']['data']).reshape(1, 5)
 			Rect = np.array(yaml_data['rectification_matrix']['data']).reshape(3, 3)
 			P = np.array(yaml_data['projection_matrix']['data']).reshape(3, 4)
-			
 			translation = np.array(yaml_data['translation_stereo']['data'])
 			quaternion = np.array(yaml_data['quaternion_stereo']['data'])
 			T_stereo = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 
-			translation = np.array(yaml_data['translation_sensor_body_imu']['data'])
-			quaternion = np.array(yaml_data['quaternion_sensor_body_imu']['data'])
-			T_sensor_bodyimu = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
-			self.extrinsics_collection[frame_id]['body_imu'] = T_sensor_bodyimu			
-			self.extrinsics_collection['body_imu'][frame_id] = np.linalg.inv(T_sensor_bodyimu)
+			if 'translation_sensor_body_imu' in yaml_data:
+				translation = np.array(yaml_data['translation_sensor_body_imu']['data'])
+				quaternion = np.array(yaml_data['quaternion_sensor_body_imu']['data'])
+				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+				self.tf_graph.connect_nodes(frame_id, 'body_imu', tf)
 
-			eventimu_frameid = '{}_imu'.format(frame_id)
-			if eventimu_frameid in yaml_data:
-				translation = np.array(yaml_data['translation_sensor_{}'.format(eventimu_frameid)]['data'])
-				quaternion = np.array(yaml_data['quaternion_sensor_{}'.format(eventimu_frameid)]['data'])
-				T_sensor_eventimu = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
-				self.extrinsics_collection[frame_id][eventimu_frameid] = T_sensor_eventimu			
-				self.extrinsics_collection[eventimu_frameid][frame_id] = np.linalg.inv(T_sensor_eventimu)
+			ei_frame_id = '{}_imu'.format(frame_id)
+			if 'translation_sensor_{}'.format(ei_frame_id) in yaml_data:
+				translation = np.array(yaml_data['translation_sensor_{}'.format(ei_frame_id)]['data'])
+				quaternion = np.array(yaml_data['quaternion_sensor_{}'.format(ei_frame_id)]['data'])
+				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+				self.tf_graph.connect_nodes(frame_id, ei_frame_id, tf)
 
 			camera = CameraPinhole(width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
 			if self.is_print:
