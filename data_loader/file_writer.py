@@ -10,7 +10,7 @@ class FileWriter():
   def write_timestamp(self, timestamps, file_path):
     with open(file_path, 'w') as file:
       for time in timestamps:
-        file.write('{}\n'.format(str(time)))
+        file.write('{:9f}\n'.format(time))
 
 if __name__ == '__main__':
   file_writer = FileWriter()

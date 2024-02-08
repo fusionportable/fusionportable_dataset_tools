@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 algorithm_rostopic_msg_frameid_dict = {
-  'ouster_points_undistorted': ['/r3live/cloud_nonregistered_raw', 'sensor_msgs/PointCloud2', 'r3live_world'],
+  'ouster_points_undistorted': ['/r3live/cloud_nonregistered_raw', 'sensor_msgs/PointCloud2', 'r3live_lidar'],
   'odometry': ['/r3live/aft_mapped_to_init', 'nav_msgs/Odometry', 'r3live_world'],
   'path': ['/r3live/path', 'nav_msgs/Path', 'r3live_world']
 }

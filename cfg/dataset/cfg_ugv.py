@@ -63,10 +63,10 @@ dataset_rostopic_msg_frameid_dict = {
   'frame_right_image_chunk_data': ['/stereo/frame_right/image_chunk_data', 'geometry_msgs/PointStamped', 'frame_cam01'],
   'frame_right_image': ['/stereo/frame_right/image_raw/compressed', 'sensor_msgs/CompressedImage', 'frame_cam01'],
   # 
+  'ugv_encoder': ['mini_hercules/encoder', 'sensor_msgs/JointState', 'mini_hercules_wheel'],
+  # 
   'stim300_imu': ['/stim300/imu/data_raw', 'sensor_msgs/Imu', 'body_imu'],
   'tf_static': ['/tf_static', 'tf2_msgs/TFMessage', 'none']
-  # 
-  'ugv_encoder': ['mini_hercules/encoder', 'sensor_msgs/JointState', 'mini_hercules_wheel']
 }
 
 if __name__ == '__main__':
