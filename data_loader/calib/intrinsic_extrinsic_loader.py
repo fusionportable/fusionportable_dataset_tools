@@ -23,6 +23,7 @@ class IntrinsicExtrinsicLoader():
 
 	def load_calibration(self, calib_path, sensor_frameid_dict):
 		# Initialize sensor extrinsics object
+		self.tf_graph = tf_graph.TFGraph()
 		for _, value in sensor_frameid_dict.items():
 			self.tf_graph.add_node(frame_id=value[0])
 
@@ -82,7 +83,7 @@ class IntrinsicExtrinsicLoader():
 				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.tf_graph.connect_nodes(frame_id, 'event_cam00', tf)
 				
-			lidar = Lidar(lidar_name)
+			lidar = Lidar(frame_id, lidar_name)
 			if self.is_print:
 				print(lidar)
 			self.sensor_collection[sensor] = lidar
@@ -110,7 +111,7 @@ class IntrinsicExtrinsicLoader():
 				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.tf_graph.connect_nodes(frame_id, 'body_imu', tf)
 
-			camera = CameraPinhole(width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
+			camera = CameraPinhole(frame_id, width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
 			if self.is_print:
 				print(camera)
 			self.sensor_collection[sensor] = camera
@@ -145,7 +146,7 @@ class IntrinsicExtrinsicLoader():
 				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.tf_graph.connect_nodes(frame_id, ei_frame_id, tf)
 
-			camera = CameraPinhole(width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
+			camera = CameraPinhole(frame_id, width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
 			if self.is_print:
 				print(camera)
 			self.sensor_collection[sensor] = camera
