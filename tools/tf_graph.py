@@ -12,10 +12,10 @@ class Node:
       return '{}'.format(self.name)
 
 class Edge:
-    def __init__(self, from_node, to_node, transformation_matrix):
+    def __init__(self, from_node, to_node, tf_matrix):
       self.from_node = from_node
       self.to_node = to_node
-      self.transformation_matrix = transformation_matrix
+      self.tf_matrix = tf_matrix
     
     def __str__(self):
       return '{} - {}'.format(self.from_node, self.to_node)
@@ -30,18 +30,18 @@ class TFGraph:
         self.nodes[frame_id] = Node(frame_id)
         self.G.add_node(frame_id)  # Add node to the networkx graph
     
-    def connect_nodes(self, from_node_name, to_node_name, transformation_matrix):
+    def connect_nodes(self, from_node_name, to_node_name, tf_matrix):
       """
         from_node_name: parent name
         to_node_name: child name
-        transformation_matrix: 4x4 transformation matrix
+        tf_matrix: 4x4 transformation matrix
       """
       if from_node_name in self.nodes and to_node_name in self.nodes:
         from_node = self.nodes[from_node_name]
         to_node = self.nodes[to_node_name]
-        edge = Edge(from_node, to_node, transformation_matrix)
+        edge = Edge(from_node, to_node, tf_matrix)
         from_node.edges.append(edge)
-        edge = Edge(to_node, from_node, np.linalg.inv(transformation_matrix))
+        edge = Edge(to_node, from_node, np.linalg.inv(tf_matrix))
         to_node.edges.append(edge)
         self.G.add_edge(from_node_name, to_node_name, weight=1.0)
       else:
@@ -64,7 +64,7 @@ class TFGraph:
           visited.add(current_node_name)
           for edge in self.nodes[current_node_name].edges:
             if edge.to_node.name not in visited:
-              queue.append((edge.to_node.name, path_tf + [edge.transformation_matrix]))
+              queue.append((edge.to_node.name, path_tf + [edge.tf_matrix]))
       return None
 
     def get_relative_transform(self, frame_id, child_frame_id):
@@ -78,15 +78,14 @@ class TFGraph:
         return None
 
     def visualize_graph(self):
-        pos = nx.spring_layout(self.G)  # Positions for all nodes
-        nx.draw(self.G, pos, with_labels=True, node_color='skyblue', node_size=700, edge_color='k', linewidths=1, font_size=15, )
-        edge_labels = dict([((u, v,), d['weight']) for u, v, d in self.G.edges(data=True)])
-        nx.draw_networkx_edge_labels(self.G, pos, edge_labels=edge_labels)
-        plt.show()
+      pos = nx.spring_layout(self.G)  # Positions for all nodes
+      nx.draw(self.G, pos, with_labels=True, node_color='skyblue', node_size=700, edge_color='k', linewidths=1, font_size=7, )
+      edge_labels = dict([((u, v,), d['weight']) for u, v, d in self.G.edges(data=True)])
+      nx.draw_networkx_edge_labels(self.G, pos, edge_labels=edge_labels)
+      plt.show()
 
-if __name__ == "__main__":
+def TEST():
   import random
-
   graph = TFGraph()
   graph.add_node('A')
   graph.add_node('B')
@@ -110,3 +109,6 @@ if __name__ == "__main__":
   print(graph.get_relative_transform('E', 'C'))  
   graph.visualize_graph()
 
+if __name__ == "__main__":
+  TEST()
+  

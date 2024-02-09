@@ -4,7 +4,8 @@ import sys
 import numpy as np
 
 class Lidar():
-  def __init__(self, lidar_name):
+  def __init__(self, frame_id, lidar_name):
+    self.frame_id = frame_id
     self.lidar_name = lidar_name
 
   def __str__(self):
