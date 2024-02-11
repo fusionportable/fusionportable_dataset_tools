@@ -47,9 +47,17 @@ class Odometry():
 
 if __name__ == '__main__':
     print('[Test] Loading Odometry messages...')
+
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--path_rosbag', type=str, help='path_to_rosbag.bag')
+    parser.add_argument('--path_output', type=str, help='path_output')
+    parser.add_argument('--topic_odometry', type=str, help='topic_odometry')
+    args = parser.parse_args()
+    print("Arguments:\n{}".format('\n'.join(['-{}: {}'.format(k, v) for k, v in args.__dict__.items()])))
+
+    # Usage: python3 data_loader.py --path_rosbag path_to_rosbag.bag --path_output path_output --topic_odometry topic_odometry
     odometry = Odometry(msg_type='nav_msgs/Odometry')
-    bag = rosbag.Bag('/Rocket_ssd/dataset/FusionPortable_dataset_develop/r3live_result/vehicle_highway00_r3live_test.bag')
-    num_msg = odometry.load_messages_write_to_file(bag=bag, \
-                                                   output_path='/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_campus00/r3live_result/odometry', \
-                                                   topic='/r3live/aft_mapped_to_init')
+    bag = rosbag.Bag(args.path_rosbag)
+    num_msg = odometry.load_messages_write_to_file(bag=bag, output_path=args.path_output, topic=args.topic_odometry)
     print('Number of messages: {}'.format(num_msg))
