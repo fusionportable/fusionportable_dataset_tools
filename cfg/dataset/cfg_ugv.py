@@ -75,5 +75,5 @@ if __name__ == '__main__':
       key, value[0]))
 
   for key, value in dataset_rostopic_msg_frameid_dict.items():
-    print('ROSTopic: {:<50}, Msg_type: {:<60}, Frame_id: {:<15}'.format(\
+    print('Sensor Involved: {:<30}, ROSTopic: {:<50}, Msg_type: {:<60}, Frame_id: {:<15}'.format(\
       key, value[0], value[1], value[2]))

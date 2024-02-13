@@ -38,14 +38,12 @@ class FileLoader():
           rotation_matrix = np.array([r11, r12, r13, r21, r22, r23, r31, r32, r33]).reshape(3, 3)
           rotation = R.from_matrix(rotation_matrix)
           quaternion = rotation.as_quat()
-          quaternions.append((quaternion[0], quaternion[1], quaternion[2], quaternion[3]))
+          quaternions.append((quaternion[0], quaternion[1], quaternion[2], quaternion[3])) # qx, qy, qz, qw
     return timestamps, quaternions, translations
 
 if __name__ == '__main__':
   file_loader = FileLoader()
-  
   timestamps = file_loader.load_timestamp(file_path='/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_highway00/raw_data/ouster00/points/timestamps.txt')
-
   timestamps, quaternions, translations = file_loader.load_odometry('/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_highway00/algorithm_result/odometry/odometry.txt')
   print(timestamps[:2])
   print(quaternions[:2])
