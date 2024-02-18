@@ -11,7 +11,7 @@ Please add this line in ```/etc/hosts```: ```143.89.6.5 www.ram-lab.com filebrow
 ### Installation
 Clone the Repo
 ```
-git clone https://github.com/HKUSTGZ-IADC/iadc_dataset_tools.git
+git clone https://github.com/HKUSTGZ-IADC/iadc_dataset_tools.git --recursive
 cd iadc_dataset_tools
 ```
 Setup the Python environment (tested on Python-3.9) or using Anaconda directly and run
