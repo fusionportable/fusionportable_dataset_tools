@@ -11,6 +11,15 @@ class FileWriter():
     with open(file_path, 'w') as file:
       for time in timestamps:
         file.write('{:9f}\n'.format(time))
+  
+  def write_odometry(self, timestamps, quaternions, translations, file_path, traj_type='TUM'):
+    with open(file_path, 'w') as file:
+      if traj_type == 'TUM':
+        for time, quaternion, translation in zip(timestamps, quaternions, translations):
+          file.write('{:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f}\n'.format(\
+            time, translation[0], translation[1], translation[2], quaternion[0], quaternion[1], quaternion[2], quaternion[3]))
+      elif traj_type == 'KITTI':
+        pass
 
   def write_kitti_calibration_intrinsics(self, platform, int_ext_loader, file_path):
     """

@@ -2,6 +2,7 @@
 import os
 import sys
 import numpy as np
+from scipy.spatial.transform import Rotation as R
 
 class FileLoader():
   def __init__(self):
@@ -14,8 +15,6 @@ class FileLoader():
     return timestamps
 
   def load_odometry(self, file_path, traj_type='TUM'):
-    from scipy.spatial.transform import Rotation as R
-
     timestamps, quaternions, translations = [], [], []
     with open(file_path, 'r') as file:
       for line in file:
