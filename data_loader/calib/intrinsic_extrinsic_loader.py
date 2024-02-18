@@ -50,21 +50,13 @@ class IntrinsicExtrinsicLoader():
 			for sensor in self.sensor_collection.keys():
 				print('Sensor: {}'.format(sensor))
 				print(self.sensor_collection[sensor])
-
-			print('Extrinsics:')
-			for frame_id, links in self.extrinsics_collection.items():
-				if len(links) > 0:
-					print('Frame id: {}'.format(frame_id))
-					for child_frame_id, tf_matrix in links.items():
-						print('      {} - {}:'.format(frame_id, child_frame_id))
-						print('{}'.format(tf_matrix))
 			
 	def load_lidar(self, sensor, frame_id, yaml_path):
 		with open(yaml_path, 'r') as yaml_file:
 			yaml_data = yaml.safe_load(yaml_file)
 
+			dataset_name = yaml_data['dataset_name']
 			lidar_name = yaml_data['lidar_name']
-
 			if 'translation_sensor_frame_cam00' in yaml_data.keys():
 				translation = np.array(yaml_data['translation_sensor_frame_cam00']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_frame_cam00']['data'])
@@ -83,7 +75,7 @@ class IntrinsicExtrinsicLoader():
 				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.tf_graph.connect_nodes(frame_id, 'event_cam00', tf)
 				
-			lidar = Lidar(frame_id, lidar_name)
+			lidar = Lidar(frame_id, dataset_name, lidar_name)
 			if self.is_print:
 				print(lidar)
 			self.sensor_collection[sensor] = lidar
@@ -93,6 +85,7 @@ class IntrinsicExtrinsicLoader():
 		with open(yaml_path, 'r') as yaml_file:
 			yaml_data = yaml.safe_load(yaml_file)
 
+			dataset_name = yaml_data['dataset_name']
 			camera_name = yaml_data['camera_name']
 			distortion_model = yaml_data['distortion_model']
 			width = yaml_data['image_width']
@@ -111,7 +104,7 @@ class IntrinsicExtrinsicLoader():
 				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.tf_graph.connect_nodes(frame_id, 'body_imu', tf)
 
-			camera = CameraPinhole(frame_id, width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
+			camera = CameraPinhole(frame_id, width, height, dataset_name, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
 			if self.is_print:
 				print(camera)
 			self.sensor_collection[sensor] = camera
@@ -121,6 +114,7 @@ class IntrinsicExtrinsicLoader():
 		with open(yaml_path, 'r') as yaml_file:
 			yaml_data = yaml.safe_load(yaml_file)
 
+			dataset_name = yaml_data['dataset_name']
 			camera_name = yaml_data['camera_name']
 			distortion_model = yaml_data['distortion_model']
 			width = yaml_data['image_width']
@@ -146,7 +140,7 @@ class IntrinsicExtrinsicLoader():
 				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
 				self.tf_graph.connect_nodes(frame_id, ei_frame_id, tf)
 
-			camera = CameraPinhole(frame_id, width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
+			camera = CameraPinhole(frame_id, width, height, dataset_name, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
 			if self.is_print:
 				print(camera)
 			self.sensor_collection[sensor] = camera

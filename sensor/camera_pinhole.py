@@ -4,10 +4,11 @@ import sys
 import numpy as np
 
 class CameraPinhole():
-  def __init__(self, frame_id, width, height, camera_name, distortion_model, K, D, Rect, P, T_stereo):
+  def __init__(self, frame_id, width, height, dataset_name, camera_name, distortion_model, K, D, Rect, P, T_stereo):
     self.frame_id = frame_id
     self.width = width
     self.height = height
+    self.dataset_name = dataset_name
     self.camera_name = camera_name
     self.distortion_model = distortion_model
     self.K = K
