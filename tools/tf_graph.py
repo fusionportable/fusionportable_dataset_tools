@@ -48,24 +48,29 @@ class TFGraph:
     
     def find_shortest_path(self, from_name, to_name):
       if from_name not in self.nodes or to_name not in self.nodes:
-        return None
+        return None, None
+
       visited = set()
-      queue = deque([(from_name, [np.eye(4, 4)])])
+      queue = deque([(from_name, ([np.eye(4, 4)], [from_name]))])
       while queue:
-        current_node_name, path_tf = queue.popleft()
+        current_node_name, path = queue.popleft()
+        path_tf, path_node = path[0], path[1]
         if current_node_name == to_name:
-          return path_tf
+          return path_tf, path_node
         if current_node_name not in visited:
-          # print('Visit: {}'.format(current_node_name))
           visited.add(current_node_name)
           for edge in self.nodes[current_node_name].edges:
             if edge.to_node.name not in visited:
-              queue.append((edge.to_node.name, path_tf + [edge.tf_matrix]))
-      return None
+              # DEBUG (gogojjh):
+              # print(current_node_name, edge.to_node.name)
+              queue.append((edge.to_node.name, (path_tf + [edge.tf_matrix], path_node + [edge.to_node.name])))
+      return None, None
 
     def get_relative_transform(self, frame_id, child_frame_id):
-      path_tf = self.find_shortest_path(frame_id, child_frame_id)
+      path_tf, path_node = self.find_shortest_path(frame_id, child_frame_id)
       if path_tf is not None:
+        # DEBUG (gogojjh):  
+        # print(path_node)
         T = np.eye(4, 4)
         for tf in path_tf:
           T = T @ tf
@@ -74,7 +79,6 @@ class TFGraph:
         return None
 
     def visualize_graph(self):
-      from scipy.spatial.transform import Rotation as R
       fig = plt.figure()
       ax = fig.add_subplot(111, projection='3d')
       
@@ -119,6 +123,7 @@ class TFGraph:
       ax.set_zlabel('Z')
       ax.set_aspect('equal')
       ax.view_init(elev=45, azim=190, roll=0)
+      ax.set_title('TF Graph')
       plt.show()
 
 def TEST():

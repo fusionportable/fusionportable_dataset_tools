@@ -21,52 +21,16 @@ class FileWriter():
       elif traj_type == 'KITTI':
         pass
 
-  def write_kitti_calibration_intrinsics(self, platform, int_ext_loader, file_path):
+  def write_kitti_calibration_camera_intrinsics(self, platform, int_ext_loader, file_path):
     """
-    Writes the KITTI camera intrinsics to a file.
-
-    Args:
-        platform: The platform on which the data was collected. Can be 'vehicle' or 'frame'.
-        int_ext_loader: The Intrinsics and Extrinsics loader object.
-        file_path: The path to the file to write the intrinsics to.
-
-    Returns:
-        None
-
-    """
-    with open(file_path, 'w') as file:
-      if platform == 'vehicle':
-        T = int_ext_loader.tf_graph.get_relative_transform('vehicle_frame_cam00', 'body_imu')[:3, :4]
-        str = 'image_00: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
-        file.write(str)
-        T = int_ext_loader.tf_graph.get_relative_transform('vehicle_frame_cam01', 'body_imu')[:3, :4]
-        str = 'image_01: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
-        file.write(str)
-      else:
-        T = int_ext_loader.tf_graph.get_relative_transform('frame_cam00', 'body_imu')[:3, :4]
-        str = 'image_00: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
-        file.write(str)
-        T = int_ext_loader.tf_graph.get_relative_transform('frame_cam01', 'body_imu')[:3, :4]
-        str = 'image_01: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
-        file.write(str)
-
-      T = int_ext_loader.tf_graph.get_relative_transform('event_cam00', 'body_imu')[:3, :4]
-      str = 'image_02: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
-      file.write(str)
-      T = int_ext_loader.tf_graph.get_relative_transform('event_cam01', 'body_imu')[:3, :4]
-      str = 'image_03: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
-      file.write(str)
-
-  def write_kitti_calibration_extrinsics(self, platform, int_ext_loader, file_path):
-    """
-    Writes the KITTI camera extrinsics to a file.
+    Writes the KITTI camera intrinsics to a file: perspective.txt
 
     Args:
         platform (str): The platform on which the calibration was performed.
             Can be either 'vehicle' or 'frame'.
         int_ext_loader (IntExtLoader): The IntExtLoader object used to load
             the intrinsic and extrinsic parameters.
-        file_path (str): The path to the file where the extrinsics will be
+        file_path (str): The path to the file where the intrinsics will be
             written.
 
     Returns:
@@ -133,6 +97,42 @@ class FileWriter():
       file.write('S_rect_03: {} {}\n'.format(camera.width, camera.height))
       file.write('R_rect_03: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
       file.write('P_rect_03: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+
+  def write_kitti_calibration_camera_extrinsics(self, platform, int_ext_loader, file_path):
+    """
+    Writes the KITTI camera extrinsics to a file - calib_cam_to_pose.txt
+
+    Args:
+        platform: The platform on which the data was collected. Can be 'vehicle' or 'frame'.
+        int_ext_loader: The extrinsics and Extrinsics loader object.
+        file_path: The path to the file to write the extrinsics to.
+
+    Returns:
+        None
+
+    """
+    with open(file_path, 'w') as file:
+      if platform == 'vehicle':
+        T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'vehicle_frame_cam00')[:3, :4]
+        str = 'image_00: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
+        file.write(str)
+        T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'vehicle_frame_cam01')[:3, :4]
+        str = 'image_01: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
+        file.write(str)
+      else:
+        T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'frame_cam00')[:3, :4]
+        str = 'image_00: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
+        file.write(str)
+        T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'frame_cam01')[:3, :4]
+        str = 'image_01: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
+        file.write(str)
+
+      T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'event_cam00')[:3, :4]
+      str = 'image_02: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
+      file.write(str)
+      T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'event_cam01')[:3, :4]
+      str = 'image_03: ' + ' '.join('{:9f}'.format(x) for x in T.flatten()) + '\n'
+      file.write(str)
 
 if __name__ == '__main__':
   file_writer = FileWriter()
