@@ -38,7 +38,7 @@ class PointCloud():
 #             return pcd_header, structured_arr
         elif self.sensor_type == 'vlp':
             fields = ['x', 'y', 'z', 'intensity']  # Add 'time' if available in your PointCloud2 message
-            structured_arr = np.zeros(cloud_arr.shape[0], dtype={'names': fields, 'formats': ['f4', 'f4', 'f4', 'f8']})
+            structured_arr = np.zeros(cloud_arr.shape[0], dtype={'names': fields, 'formats': ['f4', 'f4', 'f4', 'f4']})
             pcd_header = f"""# .PCD v.7 - Point Cloud Data file format
 VERSION .7
 FIELDS { ' '.join(structured_arr.dtype.names) }
