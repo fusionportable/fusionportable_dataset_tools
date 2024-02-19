@@ -33,13 +33,13 @@ class IntrinsicExtrinsicLoader():
 			frame_id = value[0]
 			yaml_path = os.path.join(calib_path, frame_id + '.yaml')
 			if 'ouster' in sensor and not 'imu' in sensor:
-				print('Loading Intrinsic Extrinsics from {:<20} ...'.format(yaml_path))
+				print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 				self.load_lidar(sensor, frame_id, yaml_path)
 			elif 'frame' in sensor:
-				print('Loading Intrinsic Extrinsics from {:<20} ...'.format(yaml_path))
+				print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 				self.load_frame_camera(sensor, frame_id, yaml_path)
 			elif 'event' in sensor and 'camera' in sensor:
-				print('Loading Intrinsic Extrinsics from {:<20} ...'.format(yaml_path))
+				print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 				self.load_event_camera(sensor, frame_id, yaml_path)
 			else:
 				if self.is_print:
@@ -57,6 +57,18 @@ class IntrinsicExtrinsicLoader():
 
 			dataset_name = yaml_data['dataset_name']
 			lidar_name = yaml_data['lidar_name']
+			if 'translation_sensor_ouster00_imu' in yaml_data.keys():
+				translation = np.array(yaml_data['translation_sensor_ouster00_imu']['data'])
+				quaternion = np.array(yaml_data['quaternion_sensor_ouster00_imu']['data'])
+				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+				self.tf_graph.connect_nodes(frame_id, 'ouster00_imu', tf)
+
+			if 'translation_sensor_body_imu' in yaml_data.keys():
+				translation = np.array(yaml_data['translation_sensor_body_imu']['data'])
+				quaternion = np.array(yaml_data['quaternion_sensor_body_imu']['data'])
+				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+				self.tf_graph.connect_nodes(frame_id, 'body_imu', tf)
+
 			if 'translation_sensor_frame_cam00' in yaml_data.keys():
 				translation = np.array(yaml_data['translation_sensor_frame_cam00']['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_frame_cam00']['data'])
@@ -134,7 +146,7 @@ class IntrinsicExtrinsicLoader():
 				self.tf_graph.connect_nodes(frame_id, 'body_imu', tf)
 
 			ei_frame_id = '{}_imu'.format(frame_id)
-			if 'translation_sensor_{}'.format(ei_frame_id) in yaml_data:
+			if 'translation_sensor_ecimu'.format(ei_frame_id) in yaml_data:
 				translation = np.array(yaml_data['translation_sensor_{}'.format(ei_frame_id)]['data'])
 				quaternion = np.array(yaml_data['quaternion_sensor_{}'.format(ei_frame_id)]['data'])
 				tf = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
