@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 algorithm_rostopic_msg_frameid_dict = {
-  'ouster_points_undistorted': ['/cloud_registered_body', 'sensor_msgs/PointCloud2', 'body'],
+  'ouster_points_undistorted': ['/cloud_registered_body', 'sensor_msgs/PointCloud2', 'body_imu'],
   'odometry': ['/Odometry', 'nav_msgs/Odometry', 'camera_init'],
   'path': ['/path', 'nav_msgs/Path', 'camera_init']
 }
