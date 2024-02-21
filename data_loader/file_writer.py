@@ -3,6 +3,9 @@ import os
 import sys
 import numpy as np
 
+sys.path.append('tools')
+import eigen_conversion 
+
 class FileWriter():
   def __init__(self):
     pass
@@ -19,7 +22,13 @@ class FileWriter():
           file.write('{:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f}\n'.format(\
             time, translation[0], translation[1], translation[2], quaternion[0], quaternion[1], quaternion[2], quaternion[3]))
       elif traj_type == 'KITTI':
-        pass
+        for frame_id, (time, quaternion, translation) in enumerate(zip(timestamps, quaternions, translations)):
+          T = eigen_conversion.convert_vec_to_matrix(translation, quaternion)
+          file.write('{} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f}\n'.format(\
+                      frame_id, time, \
+                      T[0][0], T[0][1], T[0][2], T[0][3], \
+                      T[1][0], T[1][1], T[1][2], T[1][3], \
+                      T[2][0], T[2][1], T[2][2], T[2][3]))
 
   def write_kitti_calibration_camera_intrinsics(self, platform, int_ext_loader, file_path):
     """
@@ -141,3 +150,15 @@ class FileWriter():
 if __name__ == '__main__':
   file_writer = FileWriter()
   file_writer.write_timestamp([335456451.123156465487878, 121212121211.45454554556666], file_path='/Rocket_ssd/dataset/tmp/timestamps.txt')
+
+  import argparse
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--path_input_odometry', type=str, help='path_input_odometry.txt')
+  parser.add_argument('--path_output_odometry', type=str, help='path_output_odometry,txt')
+  args = parser.parse_args()
+  print("Arguments:\n{}".format('\n'.join(['-{}: {}'.format(k, v) for k, v in args.__dict__.items()])))
+
+  import file_loader
+  file_loader = file_loader.FileLoader()
+  timestamps, quaternions, translations = file_loader.load_odometry(args.path_input_odometry, traj_type='TUM')
+  file_writer.write_odometry(timestamps, quaternions, translations, file_path=args.path_output_odometry, traj_type='KITTI')
