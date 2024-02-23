@@ -19,13 +19,13 @@ class FileWriter():
     with open(file_path, 'w') as file:
       if traj_type == 'TUM':
         for time, quaternion, translation in zip(timestamps, quaternions, translations):
-          file.write('{:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f}\n'.format(\
+          file.write('{:9f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
             time, translation[0], translation[1], translation[2], quaternion[0], quaternion[1], quaternion[2], quaternion[3]))
       elif traj_type == 'KITTI':
         for frame_id, (time, quaternion, translation) in enumerate(zip(timestamps, quaternions, translations)):
           T = eigen_conversion.convert_vec_to_matrix(translation, quaternion)
-          file.write('{} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f} {:9f}\n'.format(\
-                      frame_id, time, \
+          file.write('{} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+                      frame_id, \
                       T[0][0], T[0][1], T[0][2], T[0][3], \
                       T[1][0], T[1][1], T[1][2], T[1][3], \
                       T[2][0], T[2][1], T[2][2], T[2][3]))
@@ -63,51 +63,57 @@ class FileWriter():
       camera = int_ext_loader.sensor_collection[sensor_left_frame_camera]
       T = int_ext_loader.tf_graph.get_relative_transform(camera.frame_id, base_frame_id)
       file.write('calib_time: {}\n'.format(camera.dataset_name))
-      file.write('corner_dist: 0.1\n')
-      file.write('S_00: {} {}\n'.format(camera.width, camera.height))
-      file.write('K_00: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
-      file.write('D_00: {} {} {} {} {}\n'.format(camera.D[0][0], camera.D[0][1], camera.D[0][2], camera.D[0][3], camera.D[0][4]))
-      file.write('R_00: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
-      file.write('T_00: {} {} {}\n'.format(T[0][3], T[1][3], T[2][3]))
-      file.write('S_rect_00: {} {}\n'.format(camera.width, camera.height))
-      file.write('R_rect_00: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
-      file.write('P_rect_00: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+      file.write('corner_dist: 0.0\n')
+      file.write('S_00: {:6f} {:6f}\n'.format(camera.width, camera.height))
+      file.write('K_00: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+        camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+      file.write('D_00: {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(camera.D[0][0], camera.D[0][1], camera.D[0][2], camera.D[0][3], camera.D[0][4]))
+      file.write('R_00: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
+      file.write('T_00: {:6f} {:6f} {:6f}\n'.format(T[0][3], T[1][3], T[2][3]))
+      file.write('S_rect_00: {:6f} {:6f}\n'.format(camera.width, camera.height))
+      file.write('R_rect_00: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
+      file.write('P_rect_00: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+        camera.K[0][0], camera.K[0][1], camera.K[0][2], 0.0, camera.K[1][0], camera.K[1][1], camera.K[1][2], 0.0, camera.K[2][0], camera.K[2][1], camera.K[2][2], 0.0))
 
       camera = int_ext_loader.sensor_collection[sensor_right_frame_camera]
       T = int_ext_loader.tf_graph.get_relative_transform(camera.frame_id, base_frame_id)
-      file.write('S_01: {} {}\n'.format(camera.width, camera.height))
-      file.write('K_01: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
-      file.write('D_01: {} {} {} {} {}\n'.format(camera.D[0][0], camera.D[0][1], camera.D[0][2], camera.D[0][3], camera.D[0][4]))
-      file.write('R_01: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
-      file.write('T_01: {} {} {}\n'.format(T[0][3], T[1][3], T[2][3]))
-      file.write('S_rect_01: {} {}\n'.format(camera.width, camera.height))
-      file.write('R_rect_01: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
-      file.write('P_rect_01: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+      file.write('S_01: {:6f} {:6f}\n'.format(camera.width, camera.height))
+      file.write('K_01: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+        camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+      file.write('D_01: {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(camera.D[0][0], camera.D[0][1], camera.D[0][2], camera.D[0][3], camera.D[0][4]))
+      file.write('R_01: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
+      file.write('T_01: {:6f} {:6f} {:6f}\n'.format(T[0][3], T[1][3], T[2][3]))
+      file.write('S_rect_01: {:6f} {:6f}\n'.format(camera.width, camera.height))
+      file.write('R_rect_01: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
+      file.write('P_rect_01: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+        camera.K[0][0], camera.K[0][1], camera.K[0][2], 0.0, camera.K[1][0], camera.K[1][1], camera.K[1][2], 0.0, camera.K[2][0], camera.K[2][1], camera.K[2][2], 0.0))
         
       ##### Event camera
       if sensor_left_event_camera in int_ext_loader.sensor_collection.keys():
         camera = int_ext_loader.sensor_collection[sensor_left_event_camera]
         T = int_ext_loader.tf_graph.get_relative_transform(camera.frame_id, base_frame_id)
-        file.write('S_02: {} {}\n'.format(camera.width, camera.height))
-        file.write('K_02: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
-        file.write('D_02: {} {} {} {} {}\n'.format(camera.D[0][0], camera.D[0][1], camera.D[0][2], camera.D[0][3], camera.D[0][4]))
-        file.write('R_02: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
-        file.write('T_02: {} {} {}\n'.format(T[0][3], T[1][3], T[2][3]))
-        file.write('S_rect_02: {} {}\n'.format(camera.width, camera.height))
-        file.write('R_rect_02: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
-        file.write('P_rect_02: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+        file.write('S_02: {:6f} {:6f}\n'.format(camera.width, camera.height))
+        file.write('K_02: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+        file.write('D_02: {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(camera.D[0][0], camera.D[0][1], camera.D[0][2], camera.D[0][3], camera.D[0][4]))
+        file.write('R_02: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
+        file.write('T_02: {:6f} {:6f} {:6f}\n'.format(T[0][3], T[1][3], T[2][3]))
+        file.write('S_rect_02: {:6f} {:6f}\n'.format(camera.width, camera.height))
+        file.write('R_rect_02: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
+        file.write('P_rect_02: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+          camera.K[0][0], camera.K[0][1], camera.K[0][2], 0.0, camera.K[1][0], camera.K[1][1], camera.K[1][2], 0.0, camera.K[2][0], camera.K[2][1], camera.K[2][2], 0.0))
 
       if sensor_right_event_camera in int_ext_loader.sensor_collection.keys():
         camera = int_ext_loader.sensor_collection[sensor_right_event_camera]
         T = int_ext_loader.tf_graph.get_relative_transform(camera.frame_id, base_frame_id)
-        file.write('S_03: {} {}\n'.format(camera.width, camera.height))
-        file.write('K_03: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
-        file.write('D_03: {} {} {} {} {}\n'.format(camera.D[0][0], camera.D[0][1], camera.D[0][2], camera.D[0][3], camera.D[0][4]))
-        file.write('R_03: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
-        file.write('T_03: {} {} {}\n'.format(T[0][3], T[1][3], T[2][3]))
-        file.write('S_rect_03: {} {}\n'.format(camera.width, camera.height))
-        file.write('R_rect_03: {} {} {} {} {} {} {} {} {}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
-        file.write('P_rect_03: {} {} {} {} {} {} {} {} {}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+        file.write('S_03: {:6f} {:6f}\n'.format(camera.width, camera.height))
+        file.write('K_03: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(camera.K[0][0], camera.K[0][1], camera.K[0][2], camera.K[1][0], camera.K[1][1], camera.K[1][2], camera.K[2][0], camera.K[2][1], camera.K[2][2]))
+        file.write('D_03: {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(camera.D[0][0], camera.D[0][1], camera.D[0][2], camera.D[0][3], camera.D[0][4]))
+        file.write('R_03: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
+        file.write('T_03: {:6f} {:6f} {:6f}\n'.format(T[0][3], T[1][3], T[2][3]))
+        file.write('S_rect_03: {:6f} {:6f}\n'.format(camera.width, camera.height))
+        file.write('R_rect_03: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(T[0][0], T[0][1], T[0][2], T[1][0], T[1][1], T[1][2], T[2][0], T[2][1], T[2][2]))
+        file.write('P_rect_03: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+          camera.K[0][0], camera.K[0][1], camera.K[0][2], 0.0, camera.K[1][0], camera.K[1][1], camera.K[1][2], 0.0, camera.K[2][0], camera.K[2][1], camera.K[2][2], 0.0))
 
   def write_kitti_calibration_camera_extrinsics(self, platform, int_ext_loader, file_path):
     """
@@ -125,27 +131,27 @@ class FileWriter():
     with open(file_path, 'w') as file:
       if platform == 'vehicle':
         T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'vehicle_frame_cam00')
-        str = 'image_00: ' + ' '.join('{:9f}'.format(x) for x in T[:3, :4].flatten()) + '\n'
-        file.write(str)
+        file.write('image_00: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+          T[0][0], T[0][1], T[0][2], T[0][3], T[1][0], T[1][1], T[1][2], T[1][3], T[2][0], T[2][1], T[2][2], T[2][3]))
         T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'vehicle_frame_cam01')
-        str = 'image_01: ' + ' '.join('{:9f}'.format(x) for x in T[:3, :4].flatten()) + '\n'
-        file.write(str)
+        file.write('image_01: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+          T[0][0], T[0][1], T[0][2], T[0][3], T[1][0], T[1][1], T[1][2], T[1][3], T[2][0], T[2][1], T[2][2], T[2][3]))
       else:
         T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'frame_cam00')
-        str = 'image_00: ' + ' '.join('{:9f}'.format(x) for x in T[:3, :4].flatten()) + '\n'
-        file.write(str)
+        file.write('image_00: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+          T[0][0], T[0][1], T[0][2], T[0][3], T[1][0], T[1][1], T[1][2], T[1][3], T[2][0], T[2][1], T[2][2], T[2][3]))
         T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'frame_cam01')
-        str = 'image_01: ' + ' '.join('{:9f}'.format(x) for x in T[:3, :4].flatten()) + '\n'
-        file.write(str)
+        file.write('image_01: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+          T[0][0], T[0][1], T[0][2], T[0][3], T[1][0], T[1][1], T[1][2], T[1][3], T[2][0], T[2][1], T[2][2], T[2][3]))
 
       T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'event_cam00')
       if T is not None:
-        str = 'image_02: ' + ' '.join('{:9f}'.format(x) for x in T[:3, :4].flatten()) + '\n'
-        file.write(str)
+        file.write('image_02: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+          T[0][0], T[0][1], T[0][2], T[0][3], T[1][0], T[1][1], T[1][2], T[1][3], T[2][0], T[2][1], T[2][2], T[2][3]))
       T = int_ext_loader.tf_graph.get_relative_transform('body_imu', 'event_cam01')
       if T is not None:
-        str = 'image_03: ' + ' '.join('{:9f}'.format(x) for x in T[:3, :4].flatten()) + '\n'
-        file.write(str)
+        file.write('image_03: {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f} {:6f}\n'.format(\
+          T[0][0], T[0][1], T[0][2], T[0][3], T[1][0], T[1][1], T[1][2], T[1][3], T[2][0], T[2][1], T[2][2], T[2][3]))
 
 if __name__ == '__main__':
   file_writer = FileWriter()
