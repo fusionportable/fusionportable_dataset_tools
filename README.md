@@ -3,7 +3,7 @@
 ### Download
 1. Please visit [FusionPortable dataset](https://fusionportable.github.io/dataset/fusionportable) to check and download data.
 2. Download the compressed rosbag.
-3. When finished, use the similar command ```7z e 20220216_garden_day.7z``` to extract data.
+3. When finished, use the similar command ```7z l 20220216_garden_day.7z``` to extract data.
 
 <!-- ### Notice 20230928
 Please add this line in ```/etc/hosts```: ```143.89.6.5 www.ram-lab.com filebrowser.ram-lab.com``` to visit the dataset page. -->
@@ -20,15 +20,21 @@ conda create -n fp_dataset python=3.9
 pip install -r requirements
 ```
 
-### Usage
+### Usage of Key Functions
 #### 1. ```write_bag_to_data.ipynb```
 Description: Convert the raw rosbag into individual files
 
-#### 2. ```write_data_to_kitti.ipynb```
-Description: Convert the raw files into the KITTI format (for perception purpose)
+#### 2. ```write_alg_bag_to_data.ipynb```
+Description: Convert the algorithms' results (i.e., R3LIVE, FAST-LIO2) stored as the rosbag into individual files
 
-#### 3. ```write_alg_bag_to_data.ipynb```
-Description: Convert the algorithms' results (i.e., R3LIVE) stored as the rosbag into individual files
+#### 3. ```write_data_to_kitti360.ipynb```
+Description: Convert the raw files into the KITTI-360 format (including synchronized sensor data, callibration files, odometry)
+
+#### 4. ```write_depthmap_to_kitti360.ipynb```
+Description: Generate depth map with respect to the frame_left camera for the depth evaluation purpose
+
+### Usage of Tool Functions
+#### 1. ```visualize_depthmap.ipynb```
 
 ### Some Issues with Dependencies
 ##### 1. Something wrong with the ```ros_numpy```

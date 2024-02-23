@@ -33,14 +33,17 @@ class IntrinsicExtrinsicLoader():
 			frame_id = value[0]
 			yaml_path = os.path.join(calib_path, frame_id + '.yaml')
 			if 'ouster' in sensor and not 'imu' in sensor:
-				print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 				self.load_lidar(sensor, frame_id, yaml_path)
+				if self.is_print:
+					print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 			elif 'frame' in sensor:
-				print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 				self.load_frame_camera(sensor, frame_id, yaml_path)
+				if self.is_print:
+					print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 			elif 'event' in sensor and 'camera' in sensor:
-				print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 				self.load_event_camera(sensor, frame_id, yaml_path)
+				if self.is_print:
+					print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
 			else:
 				if self.is_print:
 					print('Unknown sensor: {:<20}'.format(sensor))
