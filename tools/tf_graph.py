@@ -70,7 +70,7 @@ class TFGraph:
       path_tf, path_node = self.find_shortest_path(frame_id, child_frame_id)
       if path_tf is not None:
         # DEBUG (gogojjh):  
-        # print(path_node)
+        print(path_node)
         T = np.eye(4, 4)
         for tf in path_tf:
           T = T @ tf

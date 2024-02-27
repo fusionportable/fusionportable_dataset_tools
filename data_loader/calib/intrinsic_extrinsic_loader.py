@@ -29,30 +29,40 @@ class IntrinsicExtrinsicLoader():
 
 		# Initialize sensor collection object
 		self.sensor_collection = {} # sensor_collection['ouster']
-		for sensor, value in sensor_frameid_dict.items():
+		for sensor_name, value in sensor_frameid_dict.items():
 			frame_id = value[0]
 			yaml_path = os.path.join(calib_path, frame_id + '.yaml')
-			if 'ouster' in sensor and not 'imu' in sensor:
-				self.load_lidar(sensor, frame_id, yaml_path)
+			# Ouster
+			if 'ouster' in sensor_name and not 'imu' in sensor_name:
+				self.load_lidar(sensor_name, frame_id, yaml_path)
 				if self.is_print:
 					print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
-			elif 'frame' in sensor:
-				self.load_frame_camera(sensor, frame_id, yaml_path)
+			# Frame
+			elif 'vehicle_frame' in sensor_name:
+				stereo_base_frame_id = 'vehicle_frame_cam00'
+				self.load_frame_camera(sensor_name, stereo_base_frame_id, frame_id, yaml_path)
 				if self.is_print:
 					print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
-			elif 'event' in sensor and 'camera' in sensor:
-				self.load_event_camera(sensor, frame_id, yaml_path)
+			elif 'frame' in sensor_name:
+				stereo_base_frame_id = 'frame_cam00'
+				self.load_frame_camera(sensor_name, stereo_base_frame_id, frame_id, yaml_path)
+				if self.is_print:
+					print('Loading Int & Ext from {:<20} ...'.format(yaml_path))					
+			# Event
+			elif 'event' in sensor_name and 'camera' in sensor_name:
+				stereo_base_frame_id = 'frame_cam00'
+				self.load_event_camera(sensor_name, stereo_base_frame_id, frame_id, yaml_path)
 				if self.is_print:
 					print('Loading Int & Ext from {:<20} ...'.format(yaml_path))
+			# Others
 			else:
 				if self.is_print:
-					print('Unknown sensor: {:<20}'.format(sensor))
+					print('Unknown sensor: {:<20}'.format(sensor_name))
 		
 		if self.is_print:
-			print('Sensors:')
-			for sensor in self.sensor_collection.keys():
-				print('Sensor: {}'.format(sensor))
-				print(self.sensor_collection[sensor])
+			for sensor_name in self.sensor_collection.keys():
+				print('Sensor: {}'.format(sensor_name))
+				print(self.sensor_collection[sensor_name])
 			
 	def load_lidar(self, sensor, frame_id, yaml_path):
 		with open(yaml_path, 'r') as yaml_file:
@@ -96,7 +106,7 @@ class IntrinsicExtrinsicLoader():
 			self.sensor_collection[sensor] = lidar
 
 	# NOTE(gogojjh): can only handle pinhole camera
-	def load_frame_camera(self, sensor, frame_id, yaml_path):
+	def load_frame_camera(self, sensor_name, stereo_base_frame_id, frame_id, yaml_path):
 		with open(yaml_path, 'r') as yaml_file:
 			yaml_data = yaml.safe_load(yaml_file)
 
@@ -112,6 +122,7 @@ class IntrinsicExtrinsicLoader():
 			translation = np.array(yaml_data['translation_stereo']['data'])
 			quaternion = np.array(yaml_data['quaternion_stereo']['data'])
 			T_stereo = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+			self.tf_graph.connect_nodes(frame_id, stereo_base_frame_id, T_stereo)
 
 			if 'translation_sensor_body_imu' in yaml_data:
 				translation = np.array(yaml_data['translation_sensor_body_imu']['data'])
@@ -122,10 +133,10 @@ class IntrinsicExtrinsicLoader():
 			camera = CameraPinhole(frame_id, width, height, dataset_name, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
 			if self.is_print:
 				print(camera)
-			self.sensor_collection[sensor] = camera
+			self.sensor_collection[sensor_name] = camera
 
 	# NOTE(gogojjh): can only handle pinhole camera
-	def load_event_camera(self, sensor, frame_id, yaml_path):
+	def load_event_camera(self, sensor_name, stereo_base_frame_id, frame_id, yaml_path):
 		with open(yaml_path, 'r') as yaml_file:
 			yaml_data = yaml.safe_load(yaml_file)
 
@@ -141,6 +152,7 @@ class IntrinsicExtrinsicLoader():
 			translation = np.array(yaml_data['translation_stereo']['data'])
 			quaternion = np.array(yaml_data['quaternion_stereo']['data'])
 			T_stereo = eigen_conversion.convert_vec_to_matrix(translation, quaternion[[1, 2, 3, 0]])
+			self.tf_graph.connect_nodes(frame_id, stereo_base_frame_id, T_stereo)
 
 			if 'translation_sensor_body_imu' in yaml_data:
 				translation = np.array(yaml_data['translation_sensor_body_imu']['data'])
@@ -158,11 +170,11 @@ class IntrinsicExtrinsicLoader():
 			camera = CameraPinhole(frame_id, width, height, dataset_name, camera_name, distortion_model, K, D, Rect, P, T_stereo)	
 			if self.is_print:
 				print(camera)
-			self.sensor_collection[sensor] = camera
+			self.sensor_collection[sensor_name] = camera
 
 if __name__ == "__main__":
 	sys.path.append('cfg')
-	from dataset.cfg_vehicle import dataset_sensor_frameid_dict
+	from cfg.dataset.cfg_vehicle import dataset_sensor_frameid_dict
 	int_ext_loader = IntrinsicExtrinsicLoader(is_print=True)
 	int_ext_loader.load_calibration(calib_path='/Titan/dataset/FusionPortable_dataset_develop/calibration_files/20230618_calib/calib', \
 																	sensor_frameid_dict=dataset_sensor_frameid_dict)
