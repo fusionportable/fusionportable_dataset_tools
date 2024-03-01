@@ -8,7 +8,7 @@ The toolkit executes the following sequence of operations:
 
 1. **XML to TUM Conversion (`xml2tum.py`)**: Converts raw surveying data from XML format into the TUM pose format, a common format for SLAM datasets.
 
-2. **Body Frame Transformation (`ms2body.py`)**: Transforms the TUM-formatted data into the DROID's body coordinate frame, aligning the dataset with the robot's motion.
+2. **Body Frame Transformation (`ms2body.py`)**: Transforms the TUM-formatted data into the body imu coordinate frame, aligning the dataset with the robot's motion.
 
 3. **Interpolation to 20Hz (`resample_patch.py`)**: Interpolates the transformed data to a higher temporal resolution of 20Hz, ensuring a dense and consistent set of pose estimates for comparison.
 
