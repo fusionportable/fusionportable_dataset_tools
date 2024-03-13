@@ -19,7 +19,7 @@ class IntrinsicExtrinsicLoader():
 	def __init__(self, is_print=False):
 		self.is_print = is_print
 		self.sensor_collection = {}
-		self.tf_graph = tf_graph.TFGraph()
+		self.tf_graph = tf_graph.TFGraph(is_print)
 
 	def load_calibration(self, calib_path, sensor_frameid_dict):
 		# Initialize sensor extrinsics object

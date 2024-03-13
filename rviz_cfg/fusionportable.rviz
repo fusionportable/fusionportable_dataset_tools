@@ -1,0 +1,647 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /hkustgz1
+        - /hkustgz1/Axes1
+        - /hkustgz1/Axes1/TF1
+        - /hkustgz1/Axes1/TF1/Frames1
+      Splitter Ratio: 0.5706619024276733
+    Tree Height: 834
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.5886790156364441
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Name: Time
+    SyncMode: 0
+    SyncSource: ""
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Class: rviz/Axes
+          Enabled: true
+          Length: 3
+          Name: Axes
+          Radius: 0.30000001192092896
+          Reference Frame: <Fixed Frame>
+          Show Trail: false
+          Value: true
+        - Alpha: 0.5
+          Cell Size: 1
+          Class: rviz/Grid
+          Color: 160; 160; 164
+          Enabled: true
+          Line Style:
+            Line Width: 0.029999999329447746
+            Value: Lines
+          Name: Grid
+          Normal Cell Count: 0
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Plane: XY
+          Plane Cell Count: 10
+          Reference Frame: <Fixed Frame>
+          Value: true
+        - Angle Tolerance: 0.10000000149011612
+          Class: rviz/Odometry
+          Covariance:
+            Orientation:
+              Alpha: 0.5
+              Color: 255; 255; 127
+              Color Style: Unique
+              Frame: Local
+              Offset: 1
+              Scale: 1
+              Value: true
+            Position:
+              Alpha: 0.30000001192092896
+              Color: 204; 51; 204
+              Scale: 1
+              Value: true
+            Value: true
+          Enabled: true
+          Keep: 10000
+          Name: Odometry
+          Position Tolerance: 0.10000000149011612
+          Queue Size: 10
+          Shape:
+            Alpha: 1
+            Axes Length: 2
+            Axes Radius: 0.5
+            Color: 255; 25; 0
+            Head Length: 0.30000001192092896
+            Head Radius: 0.10000000149011612
+            Shaft Length: 1
+            Shaft Radius: 0.05000000074505806
+            Value: Axes
+          Topic: /odom_pose
+          Unreliable: false
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: Ouster
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1.5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /os_cloud_node/points
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /stereo/frame_left/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: FrameLeft
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /stereo/frame_right/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: FrameRight
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: true
+          Image Topic: /stereo/vehicle_frame_left/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: VehicleFrameLeft
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: true
+        - Class: rviz/Image
+          Enabled: true
+          Image Topic: /stereo/vehicle_frame_right/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: VehicleFrameRight
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: true
+        - Class: rviz/Image
+          Enabled: true
+          Image Topic: /stereo/davis_left/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: EventLeft
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: true
+        - Class: rviz/Image
+          Enabled: true
+          Image Topic: /stereo/davis_right/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: EventRight
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Unreliable: false
+          Value: true
+      Enabled: false
+      Name: hkust
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz/Group
+          Displays:
+            - Alpha: 1
+              Class: rviz/Axes
+              Enabled: false
+              Length: 10
+              Name: Axes
+              Radius: 0.10000000149011612
+              Reference Frame: <Fixed Frame>
+              Show Trail: false
+              Value: false
+            - Class: rviz/TF
+              Enabled: true
+              Filter (blacklist): ""
+              Filter (whitelist): ""
+              Frame Timeout: 15
+              Frames:
+                All Enabled: false
+                body_imu:
+                  Value: true
+                event_cam00:
+                  Value: true
+                event_cam01:
+                  Value: true
+                frame_cam00:
+                  Value: false
+                frame_cam01:
+                  Value: false
+                ouster00:
+                  Value: true
+                ouster00_imu:
+                  Value: false
+                vehicle_frame_cam00:
+                  Value: true
+                vehicle_frame_cam01:
+                  Value: true
+              Marker Alpha: 1
+              Marker Scale: 0.5
+              Name: TF
+              Show Arrows: true
+              Show Axes: true
+              Show Names: true
+              Tree:
+                body_imu:
+                  event_cam00:
+                    {}
+                  event_cam01:
+                    {}
+                  frame_cam00:
+                    {}
+                  frame_cam01:
+                    {}
+                  ouster00:
+                    {}
+                  ouster00_imu:
+                    {}
+                  vehicle_frame_cam00:
+                    {}
+                  vehicle_frame_cam01:
+                    {}
+              Update Interval: 0
+              Value: true
+            - Alpha: 0.5
+              Cell Size: 1
+              Class: rviz/Grid
+              Color: 160; 160; 164
+              Enabled: true
+              Line Style:
+                Line Width: 0.029999999329447746
+                Value: Lines
+              Name: Grid
+              Normal Cell Count: 0
+              Offset:
+                X: 0
+                Y: 0
+                Z: -2
+              Plane: XY
+              Plane Cell Count: 10
+              Reference Frame: <Fixed Frame>
+              Value: true
+          Enabled: true
+          Name: Axes
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: ring
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: Velodyne
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 2
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /velodyne_points
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: ""
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: RSLidar
+          Position Transformer: ""
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /rslidar_points
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: reflectivity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: Ouster
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /os_cloud_node/points
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /stereo/frame_left/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: CamLeft
+          Normalize Range: true
+          Queue Size: 1
+          Transport Hint: compressed
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /stereo/frame_right/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: CamRight
+          Normalize Range: true
+          Queue Size: 1
+          Transport Hint: compressed
+          Unreliable: false
+          Value: false
+        - Class: rviz/Camera
+          Enabled: true
+          Image Rendering: background
+          Image Topic: /stereo/frame_left/image_raw
+          Name: CameraLeft
+          Overlay Alpha: 0.5
+          Queue Size: 1
+          Transport Hint: compressed
+          Unreliable: false
+          Value: true
+          Visibility:
+            Value: true
+            hkust:
+              Axes: true
+              EventLeft: true
+              EventRight: true
+              FrameLeft: true
+              FrameRight: true
+              Grid: true
+              Odometry: true
+              Ouster: true
+              Value: true
+              VehicleFrameLeft: true
+              VehicleFrameRight: true
+            hkustgz:
+              Axes:
+                Axes: true
+                Grid: true
+                TF: true
+                Value: true
+              CamLeft: true
+              CamRight: true
+              CameraRight: true
+              EventCameraLeft: true
+              EventCameraRight: true
+              Ouster: true
+              RSLidar: true
+              Value: true
+              Velodyne: true
+          Zoom Factor: 1.5
+        - Class: rviz/Camera
+          Enabled: true
+          Image Rendering: background
+          Image Topic: /stereo/frame_right/image_raw
+          Name: CameraRight
+          Overlay Alpha: 0.5
+          Queue Size: 1
+          Transport Hint: compressed
+          Unreliable: false
+          Value: true
+          Visibility:
+            Value: true
+            hkust:
+              Axes: true
+              EventLeft: true
+              EventRight: true
+              FrameLeft: true
+              FrameRight: true
+              Grid: true
+              Odometry: true
+              Ouster: true
+              Value: true
+              VehicleFrameLeft: true
+              VehicleFrameRight: true
+            hkustgz:
+              Axes:
+                Axes: true
+                Grid: true
+                TF: true
+                Value: true
+              CamLeft: true
+              CamRight: true
+              CameraLeft: true
+              EventCameraLeft: true
+              EventCameraRight: true
+              Ouster: true
+              RSLidar: true
+              Value: true
+              Velodyne: true
+          Zoom Factor: 1.5
+        - Class: rviz/Camera
+          Enabled: true
+          Image Rendering: background and overlay
+          Image Topic: /stereo/davis_left/image_raw
+          Name: EventCameraLeft
+          Overlay Alpha: 0.5
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: true
+          Visibility:
+            Value: true
+            hkust:
+              Axes: true
+              EventLeft: true
+              EventRight: true
+              FrameLeft: true
+              FrameRight: true
+              Grid: true
+              Odometry: true
+              Ouster: true
+              Value: true
+              VehicleFrameLeft: true
+              VehicleFrameRight: true
+            hkustgz:
+              Axes:
+                Axes: true
+                Grid: true
+                TF: true
+                Value: true
+              CamLeft: true
+              CamRight: true
+              CameraLeft: true
+              CameraRight: true
+              EventCameraRight: true
+              Ouster: true
+              RSLidar: true
+              Value: true
+              Velodyne: true
+          Zoom Factor: 1.5
+        - Class: rviz/Camera
+          Enabled: true
+          Image Rendering: background and overlay
+          Image Topic: /stereo/davis_right/image_raw
+          Name: EventCameraRight
+          Overlay Alpha: 0.5
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: true
+          Visibility:
+            Value: true
+            hkust:
+              Axes: true
+              EventLeft: true
+              EventRight: true
+              FrameLeft: true
+              FrameRight: true
+              Grid: true
+              Odometry: true
+              Ouster: true
+              Value: true
+              VehicleFrameLeft: true
+              VehicleFrameRight: true
+            hkustgz:
+              Axes:
+                Axes: true
+                Grid: true
+                TF: true
+                Value: true
+              CamLeft: true
+              CamRight: true
+              CameraLeft: true
+              CameraRight: true
+              EventCameraLeft: true
+              Ouster: true
+              RSLidar: true
+              Value: true
+              Velodyne: true
+          Zoom Factor: 1.5
+      Enabled: true
+      Name: hkustgz
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Default Light: true
+    Fixed Frame: ouster00
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Theta std deviation: 0.2617993950843811
+      Topic: /initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 1.8998852968215942
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Field of View: 0.7853981852531433
+      Focal Point:
+        X: 0.2200763076543808
+        Y: -0.08274425566196442
+        Z: -0.4172111451625824
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 1.0047961473464966
+      Target Frame: <Fixed Frame>
+      Yaw: 3.0904088020324707
+    Saved: ~
+Window Geometry:
+  CamLeft:
+    collapsed: false
+  CamRight:
+    collapsed: false
+  CameraLeft:
+    collapsed: false
+  CameraRight:
+    collapsed: false
+  Displays:
+    collapsed: false
+  EventCameraLeft:
+    collapsed: false
+  EventCameraRight:
+    collapsed: false
+  EventLeft:
+    collapsed: false
+  EventRight:
+    collapsed: false
+  FrameLeft:
+    collapsed: false
+  FrameRight:
+    collapsed: false
+  Height: 1391
+  Hide Left Dock: false
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd0000000400000000000002310000037ffc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000001d30000037f000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d006100670065010000028c000001740000000000000000fb0000000a0049006d00610067006500000002e60000011a0000000000000000fb00000012004600720061006d0065004c00650066007400000002a2000000930000001600fffffffb00000014004600720061006d006500520069006700680074000000033b000000c50000001600ffffff000000010000010f000001ddfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000020a000001dd000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b2000000000000000000000002000006a1000001a6fc0100000011fb0000000e00430061006d004c0065006600740000000000000000a00000006e00fffffffb0000001000430061006d005200690067006800740000000000000000ac0000007700fffffffb0000001400430061006d006500720061004c00650066007401000000000000029a0000008400fffffffb0000001600430061006d0065007200610052006900670068007401000002a0000001fe0000008d00fffffffb0000001e004500760065006e007400430061006d006500720061004c00650066007401000004a4000000fe000000ab00fffffffb00000020004500760065006e007400430061006d0065007200610052006900670068007401000005a8000000f9000000b300fffffffb0000001e004500760065006e007400430061006d006500720061004c00650066007400000005d2000001810000000000000000fb00000020004500760065006e007400430061006d006500720061005200690067006800740000000497000002bc0000000000000000fb0000000e00630061006d004c00650066007400000000000000038e0000000000000000fb0000001000630061006d005200690067006800740000000394000003bf0000000000000000fb00000012004500760065006e0074004c0065006600740000000000000001940000007700fffffffb00000014004500760065006e007400520069006700680074000000019a000001630000007f00fffffffb0000002000560065006800690063006c0065004600720061006d0065004c0065006600740000000303000001f2000000ac00fffffffb0000002200560065006800690063006c0065004600720061006d00650052006900670068007400000004fb00000258000000b500fffffffb00000012004600720061006d0065004c00650066007401000004c6000001610000000000000000fb00000014004600720061006d006500520069006700680074010000062d000001260000000000000000fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000003ac0000003efc0100000002fb0000000800540069006d00650000000000000003ac0000041800fffffffb0000000800540069006d006501000000000000045000000000000000000000046a0000037f00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  VehicleFrameLeft:
+    collapsed: false
+  VehicleFrameRight:
+    collapsed: false
+  Views:
+    collapsed: true
+  Width: 1697
+  X: 1741
+  Y: 37

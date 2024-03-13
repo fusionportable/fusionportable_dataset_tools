@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 dataset_sequence_calib_used_dict = {
-  'handheld_escalator00': ['handheld', '20230426_calib', False],
+  'handheld_escalator00': ['handheld', '20230426_calib', True],
   'handheld_room00': ['handheld', '20230426_calib', False],
   'legged_grass00': ['legged', '20230912_calib', False],
   'legged_room00': ['legged', '20230912_calib', False],
