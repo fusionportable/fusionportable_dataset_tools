@@ -20,8 +20,9 @@ class Edge:
       return '{} - {}'.format(self.from_node, self.to_node)
 
 class TFGraph:
-    def __init__(self):
+    def __init__(self, is_print=False):
       self.nodes = {}
+      self.is_print = is_print
     
     def add_node(self, frame_id):
       if frame_id not in self.nodes:
@@ -61,16 +62,14 @@ class TFGraph:
           visited.add(current_node_name)
           for edge in self.nodes[current_node_name].edges:
             if edge.to_node.name not in visited:
-              # DEBUG (gogojjh):
-              # print(current_node_name, edge.to_node.name)
               queue.append((edge.to_node.name, (path_tf + [edge.tf_matrix], path_node + [edge.to_node.name])))
       return None, None
 
     def get_relative_transform(self, frame_id, child_frame_id):
       path_tf, path_node = self.find_shortest_path(frame_id, child_frame_id)
       if path_tf is not None:
-        # DEBUG (gogojjh):  
-        print(path_node)
+        if self.is_print:
+          print(path_node)
         T = np.eye(4, 4)
         for tf in path_tf:
           T = T @ tf
@@ -125,6 +124,47 @@ class TFGraph:
       ax.view_init(elev=45, azim=190, roll=0)
       ax.set_title('TF Graph')
       plt.show()
+
+    def publish_graph(self):
+      if 'body_imu' not in self.nodes:
+        print('The base frame_id does not exist.')
+        return
+
+      import rospy
+      import tf2_ros
+      from geometry_msgs.msg import TransformStamped
+      from eigen_conversion import convert_matrix_to_vec
+
+      if not rospy.core.is_initialized():
+        print('Initialize a ROS node to repeatedly publish TF messages.')
+        rospy.init_node('visualize_tf_tree', anonymous=True)
+
+      broadcaster = tf2_ros.StaticTransformBroadcaster()
+      transform = TransformStamped()
+
+      while True:
+        if rospy.is_shutdown():
+          break
+
+        transform.header.stamp = rospy.Time.now()
+        for frame_id, _ in self.nodes.items():
+          if frame_id != 'body_imu':
+            tf_base_sensor = self.get_relative_transform('body_imu', frame_id)
+            if tf_base_sensor is not None:
+              transform.header.frame_id = 'body_imu'
+              transform.child_frame_id = frame_id
+              
+              vec_p, vec_q = convert_matrix_to_vec(tf_base_sensor)
+              transform.transform.translation.x = vec_p[0]
+              transform.transform.translation.y = vec_p[1]
+              transform.transform.translation.z = vec_p[2]
+              transform.transform.rotation.x = vec_q[0]
+              transform.transform.rotation.y = vec_q[1]
+              transform.transform.rotation.z = vec_q[2]
+              transform.transform.rotation.w = vec_q[3]
+
+              broadcaster.sendTransform(transform)
+       
 
 def TEST():
   import random

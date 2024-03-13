@@ -4,3 +4,5 @@ __pycache__
 *.pyc
 
 .vscode/
+
+doc/debug_*
