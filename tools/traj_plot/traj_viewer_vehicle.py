@@ -53,16 +53,20 @@ def visualize_final_complete_trajectories_3D(datasets, ax, labels, font):
     ax.w_yaxis.line.set_linewidth(1.5)
     ax.w_zaxis.line.set_color("black")
     ax.w_zaxis.line.set_linewidth(1.5)
-    ax.set_xlabel('X [m]', fontproperties=font,labelpad=15)
-    ax.set_ylabel('Y [m]', fontproperties=font,labelpad=15)
-    ax.set_zlabel('Z [m]', fontproperties=font,labelpad=15)
+    ax.set_xlabel('X [m]', fontproperties=font,labelpad=35)
+    ax.set_ylabel('Y [m]', fontproperties=font,labelpad=35)
+    ax.set_zlabel('Z [m]', fontproperties=font,labelpad=35)
+
+    ax.tick_params(axis='x', which='major', pad=10)  
+    ax.tick_params(axis='y', which='major', pad=10)
+    ax.tick_params(axis='z', which='major', pad=15) 
    # ax.set_title('3D Trajectories', fontproperties=font)
     ax.legend(handles=ax.lines[:len(labels)] + [plt.Line2D([0], [0], color=colors[0], marker=markers[0], linestyle='None', markersize=10, label='Start'),
                                                 plt.Line2D([0], [0], color=colors[0], marker=markers[1], linestyle='None', markersize=10, label='End')],
               prop=font, loc='upper left', bbox_to_anchor=(1, 1),  edgecolor='black', facecolor='none', framealpha=1, markerscale=1.5, frameon=True).get_frame().set_linewidth(1.5)
 
 # Adjusted font properties
-fonesize = 20
+fonesize = 35
 font = FontProperties()
 font.set_family('serif')
 font.set_name('Times New Roman')
@@ -74,6 +78,8 @@ plt.rcParams['font.size'] = fonesize
 plt.rcParams['xtick.labelsize'] = fonesize
 plt.rcParams['ytick.labelsize'] = fonesize
 plt.rcParams['legend.fontsize'] = fonesize
+#plt.subplots_adjust(right=0.5)  # Adjust the right margin so there's space for the legend
+
 
 
 
@@ -129,7 +135,7 @@ for f in filenames:
     elif "fastlio2" in filename:
         labels.append("FAST-LIO2")
     elif "vinfusion(lc)" in filename:
-        labels.append("Vins-Fusion(LC)")
+        labels.append("VINS-Fusion(LC)")
     elif "r3live" in filename:
         labels.append("R3LIVE")
     else:
