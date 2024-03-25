@@ -37,6 +37,14 @@ Description: Generate depth map with respect to the frame_left camera for the de
 #### ```visualize_depthmap.ipynb```
 Description: Project undistorted point cloud onto image to verify the error in extrinsics
 
+### Usage of Evaluation Tools
+Trajectory Evaluation
+
+Mapping Evaluation
+
+### Usage of Applications
+
+
 ## Some Issues with Dependencies
 ##### 1. Something wrong with the ```ros_numpy```
 ```python
@@ -49,6 +57,9 @@ AttributeError: module 'numpy' has no attribute 'float'.
 ```python
 def get_xyz_points(cloud_array, remove_nans=True, dtype=np.float64):
 ```
+
+## Contribution
+Please refer to [Contribution Guidance](doc/contribution.md) to make contributions to this project.
 
 ### Inquiry
 Please feel free to contact Dr.Jianhao Jiao (jiaojh1994 at gmail.com) or Mr.Hexiang Wei (hweiak at connect.ust.hk) if you have any questions.
