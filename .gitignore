@@ -6,3 +6,9 @@ __pycache__
 .vscode/
 
 doc/debug_*
+
+*.png
+*.pdf
+*.jpg
+
+figure/*
