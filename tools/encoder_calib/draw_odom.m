@@ -41,7 +41,7 @@ xlabel("X [m]"); ylabel("Y [m]"); zlabel("Z [m]");
 
 hold off;
 axis on; 
-% axis equal;
+axis equal;
 grid on;
 xlim([-17, 15]);
 ylim([-1, 28]);
