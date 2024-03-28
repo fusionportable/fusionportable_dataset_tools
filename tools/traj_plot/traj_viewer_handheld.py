@@ -15,7 +15,7 @@ def visualize_final_complete_trajectories_2D(datasets, ax, labels, font):
         ax.plot(data['tx'], data['ty'], color=colors[i % len(colors)], linewidth=linewidth, label=labels[i])
         ax.scatter(data['tx'].iloc[0], data['ty'].iloc[0], c=colors[i % len(colors)], marker=markers[0], s=100)
         ax.scatter(data['tx'].iloc[-1], data['ty'].iloc[-1], c=colors[i % len(colors)], marker=markers[1], s=100)
-    ax.grid(True, which='both', linestyle='--', linewidth=0.5)
+    ax.grid(True, which='both', linestyle='-', linewidth=2, alpha=0.7)
     for spine in ax.spines.values():
         spine.set_color('black')
         spine.set_linewidth(1.5)
@@ -37,7 +37,7 @@ def visualize_final_complete_trajectories_3D(datasets, ax, labels, font):
         ax.plot(data['tx'], data['ty'], data['tz'], color=colors[i % len(colors)], linewidth=linewidth, label=labels[i])
         ax.scatter(data['tx'].iloc[0], data['ty'].iloc[0], data['tz'].iloc[0], c=colors[i % len(colors)], marker=markers[0], s=100)
         ax.scatter(data['tx'].iloc[-1], data['ty'].iloc[-1], data['tz'].iloc[-1], c=colors[i % len(colors)], marker=markers[1], s=100)
-    ax.grid(True)
+    ax.grid(True,which='both', linestyle='-', linewidth=2, alpha=0.7)
     ax.w_xaxis.pane.fill = False
     ax.w_yaxis.pane.fill = False
     ax.w_zaxis.pane.fill = False
