@@ -12,3 +12,4 @@ doc/debug_*
 *.jpg
 
 figure/*
+build/

@@ -97,7 +97,7 @@ if __name__ == "__main__":
     print(f"Loading data from {data_directory}")
 
     platforms = ['handheld', 'legged', 'ugv', 'vehicle']
-    seq_plot = ['handheld_room00', 'legged_grass00', 'ugv_campus00', 'vehicle_highway00']
+    seq_plot = ['handheld_underground00', 'legged_grass00', 'ugv_parking03', 'vehicle_highway00']
     for platform, seq in zip(platforms, seq_plot):
         process_and_plot_for_platform(data_directory, platform, seq)
 
