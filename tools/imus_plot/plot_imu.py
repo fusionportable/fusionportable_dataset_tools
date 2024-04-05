@@ -1,10 +1,11 @@
-import os
+import os, sys
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-from acquire_color_list import color_list
 
 FOLDER_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(FOLDER_PATH, '..'))
+from acquire_color_list import color_list
 
 plt.rcParams['font.family'] = 'Times New Roman'
 plt.rcParams['font.weight'] = 'normal'
