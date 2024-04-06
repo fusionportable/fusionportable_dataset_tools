@@ -89,8 +89,8 @@ plt.rcParams['legend.fontsize'] = fonesize
 
 # Reordered filenames for legged_grass00
 filenames = [
-    "./data/legged_grass00/legged_grass00_droid.txt",
-    "./data/legged_grass00/legged_grass00_vinfusion(lc).txt",
+    # "./data/legged_grass00/legged_grass00_droid.txt",
+    # "./data/legged_grass00/legged_grass00_vinfusion(lc).txt",
     "./data/legged_grass00/legged_grass00_fastlio2.txt",
     "./data/legged_grass00/legged_grass00_r3live.txt",
     "./data/legged_grass00/legged_grass00_initialed.txt"
@@ -127,9 +127,9 @@ plt.tight_layout()
 # Plot final complete 3D trajectories
 fig_3d = plt.figure(figsize=(8, 6))
 ax_3d = fig_3d.add_subplot(111, projection='3d')
-visualize_final_complete_trajectories_3D(datasets, ax_3d, labels, font)
+# visualize_final_complete_trajectories_3D(datasets, ax_3d, labels, font)
 plt.tight_layout()
 plt.show()
 # Optionally, save the plots
-fig_3d.savefig("3D_trajectory_visualization.pdf", bbox_inches='tight', dpi=300)
-fig_2d.savefig("2D_trajectory_visualization.pdf", bbox_inches='tight', dpi=300)
+# fig_3d.savefig("3D_trajectory_visualization.pdf", bbox_inches='tight', dpi=300)
+# fig_2d.savefig("2D_trajectory_visualization.pdf", bbox_inches='tight', dpi=300)
