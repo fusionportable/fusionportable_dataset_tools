@@ -1,7 +1,11 @@
 # FusionPortable_dataset_tools
 
+## News
+* (20240408) Initial development tools have been released
+* (20240407) Data of FusionPortable are also stored in Google Drive. Please check the [webpage](https://fusionportable.github.io/dataset/fusionportable) to download.
+
 ## Download Dataset
-1. Please visit [FusionPortable dataset](https://fusionportable.github.io/dataset/fusionportable) to check and download data.
+1. Please visit [FusionPortable dataset](https://fusionportable.github.io/dataset/fusionportable) and [FusionPortableV2_dataset](https://fusionportable.github.io/dataset/fusionportable_v2) to check and download data.
 2. Download the compressed rosbag.
 3. When finished, use the similar command ```7z l 20220216_garden_day.7z``` to extract data.
 
@@ -11,8 +15,8 @@ Please add this line in ```/etc/hosts```: ```143.89.6.5 www.ram-lab.com filebrow
 ## Installation
 Clone the Repo
 ```
-git clone https://github.com/HKUSTGZ-IADC/iadc_dataset_tools.git --recursive
-cd iadc_dataset_tools
+git clone https://github.com/fusionportable/fusionportable_dataset_tools.git --recursive
+cd fusionportable_dataset_tools
 ```
 Setup the Python environment (tested on Python-3.9) or using Anaconda directly and run
 ```
@@ -21,28 +25,24 @@ pip install -r requirements
 ```
 
 ## Usage
-#### ```write_bag_to_data.ipynb```
-Description: Convert the raw rosbag into individual files
+#### Usage of Data-Loader-Related Functions
+1. Convert the raw rosbag into individual files: ```write_bag_to_data.ipynb```
 
-#### ```write_alg_bag_to_data.ipynb```
-Description: Convert the algorithms' results (i.e., R3LIVE, FAST-LIO2) stored as the rosbag into individual files
+2. Convert the algorithms' results (i.e., R3LIVE, FAST-LIO2) stored as the rosbag into individual files: ```write_alg_bag_to_data.ipynb```
 
-#### ```write_data_to_kitti360.ipynb```
-Description: Convert the raw files into the KITTI-360 format (including synchronized sensor data, callibration files, odometry)
+3. Convert the raw files into the KITTI-360 format (including synchronized sensor data, callibration files, odometry): ```write_data_to_kitti360.ipynb```
 
-#### ```write_depthmap_to_kitti360.ipynb```
-Description: Generate depth map with respect to the frame_left camera for the depth evaluation purpose
+4. Generate depth map with respect to the frame_left camera for the depth evaluation purpose: ```write_depthmap_to_kitti360.ipynb```
 
-### Usage of Tool Functions
-#### ```visualize_depthmap.ipynb```
-Description: Project undistorted point cloud onto image to verify the error in extrinsics
+#### Usage of Tool Functions
+1. Project undistorted point cloud onto image to verify the error in extrinsics: ```visualize_depthmap.ipynb```
 
-### Usage of Evaluation Tools
-Trajectory Evaluation
+#### Usage of Evaluation Tools
+* Trajectory Evaluation
 
-Mapping Evaluation
+* Mapping Evaluation
 
-### Usage of Applications
+#### Usage of Applications
 
 
 ## Some Issues with Dependencies
@@ -61,5 +61,28 @@ def get_xyz_points(cloud_array, remove_nans=True, dtype=np.float64):
 ## Contribution
 Please refer to [Contribution Guidance](doc/contribution.md) to make contributions to this project.
 
-### Inquiry
+## Inquiry
 Please feel free to contact Dr.Jianhao Jiao (jiaojh1994 at gmail.com) or Mr.Hexiang Wei (hweiak at connect.ust.hk) if you have any questions.
+
+## Citation
+```
+@inproceedings{wei2024fusionportablev2,
+  title={FusionportableV2},
+  author={},
+  booktitle={},
+  pages={},
+  year={},
+  organization={}
+}
+```
+
+```
+@inproceedings{jiao2022fusionportable,
+  title={Fusionportable: A multi-sensor campus-scene dataset for evaluation of localization and mapping accuracy on diverse platforms},
+  author={Jiao, Jianhao and Wei, Hexiang and Hu, Tianshuai and Hu, Xiangcheng and Zhu, Yilong and He, Zhijian and Wu, Jin and Yu, Jingwen and Xie, Xupeng and Huang, Huaiyang and others},
+  booktitle={2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages={3851--3856},
+  year={2022},
+  organization={IEEE}
+}
+```
