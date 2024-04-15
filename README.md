@@ -66,13 +66,13 @@ Please feel free to contact Dr.Jianhao Jiao (jiaojh1994 at gmail.com) or Mr.Hexi
 
 ## Citation
 ```
-@inproceedings{wei2024fusionportablev2,
-  title={FusionportableV2},
-  author={},
-  booktitle={},
-  pages={},
-  year={},
-  organization={}
+@misc{wei2024fusionportablev2,
+      title={FusionPortableV2: A Unified Multi-Sensor Dataset for Generalized SLAM Across Diverse Platforms and Scalable Environments}, 
+      author={Hexiang Wei and Jianhao Jiao and Xiangcheng Hu and Jingwen Yu and Xupeng Xie and Jin Wu and Yilong Zhu and Yuxuan Liu and Lujia Wang and Ming Liu},
+      year={2024},
+      eprint={2404.08563},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO}
 }
 ```
 
