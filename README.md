@@ -1,6 +1,7 @@
 # FusionPortable_dataset_tools
 
 ## News
+* (20240425) Map evaluation tools have been released
 * (20240408) Initial development tools have been released
 * (20240407) Data of FusionPortable are also stored in Google Drive. Please check the [webpage](https://fusionportable.github.io/dataset/fusionportable) to download.
 
