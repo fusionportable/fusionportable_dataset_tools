@@ -1,9 +1,12 @@
 # FusionPortable_dataset_tools
 
 ## News
-* (20240425) Map evaluation tools have been released
-* (20240408) Initial development tools have been released
-* (20240407) Data of FusionPortable are also stored in Google Drive. Please check the [webpage](https://fusionportable.github.io/dataset/fusionportable) to download.
+* (20240508) Groundtruth poses of all vehicle-related sequences are postprocessed: eliminate poses characterized by high uncertainty.
+* (20240422) Data can be downloaded from <a href="https://pan.baidu.com/s/1lZwK-TNrCyoyC9oWEs8jUg?pwd=byj8">Baidu Wang Pan</a> with the code <b>byj8</b>.
+* (20240414) All sequences, ground-truth trajectories, and ground-truth maps have been publicly released. If you find issues of GT trajectories and maps, please contact us or report <a href="https://github.com/fusionportable/fusionportable_dataset_tools/issues">here</a>.
+* (20240413) A small simulated navigation environment is provied.
+* (20240408) The development tool has been initially released.
+* (20240407) Data can be downloaded from <a href="https://drive.google.com/drive/folders/1PYhnf3PlY5r0hbyzWDGTUTPxRMl6SYa-?usp=sharing">Google Drive</a>. 
 
 ## Download Dataset
 1. Please visit [FusionPortable dataset](https://fusionportable.github.io/dataset/fusionportable) and [FusionPortableV2_dataset](https://fusionportable.github.io/dataset/fusionportable_v2) to check and download data.
