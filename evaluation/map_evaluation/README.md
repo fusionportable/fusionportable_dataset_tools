@@ -75,7 +75,7 @@ if we do not have gt map, we can evaluate the **Mean Map Entropy (MME)**, smalle
 
 we can also get a simpe mesh reconstructed from point cloud map.
 
-![image-20230101200651976](./README/image4png)
+![image-20230101200651976](./README/image4.png)
 
 5. we got the result flies.
 
@@ -116,7 +116,7 @@ we can use [CloudCompare](https://github.com/CloudCompare/CloudCompare) to align
 
 ![image-20230106135937336](./README/image6.png)
 
-![image-20230106140017020](README/image-20230106140017020.png)
+![image-20230106140017020](./README/image-20230106140017020.png)
 
 ### What's the difference between raw rendered map and inlier rendered map?
 
