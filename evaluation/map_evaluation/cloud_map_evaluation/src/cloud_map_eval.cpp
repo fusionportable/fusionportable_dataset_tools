@@ -47,7 +47,7 @@ int CloudMapEva::process() {
         std::cout << "2. Calculate MME: " << (tic_toc.toc() - t2) / 1000.0 << " [s]" << std::endl;
     }
 
-    /** if building mesh */
+    /** if building mesh,  do not recommend */
     if (eva_mesh) {
         gt_mesh = createMeshFromPCD(gt_3d_, 0.6, 10);
         //    gt_mesh_filtered = gt_mesh->FilterSmoothLaplacian(10, 0.5);
@@ -679,7 +679,8 @@ void CloudMapEva::calculateMetrics(pipelines::registration::RegistrationResult &
         f1_vec[i] = pr / p_plus_r;  // F1 Score
     }
     std::cout << "Chamfer Distance: " << cd_vec.transpose() << std::endl;
-    std::cout << "F1 Score: " << f1_vec.transpose() << std::endl;
+    // something wrong with fitness score, do not use it
+    // std::cout << "F1 Score: " << f1_vec.transpose() << std::endl;
     std::cout << "MME: " << mme_est << " " << mme_gt << std::endl;
 }
 
@@ -710,8 +711,8 @@ void CloudMapEva::saveResults() {
                 << est_gt_results.at(2).transpose() << std::endl;
     file_result << std::fixed << setprecision(5) << "CD: " << cd_vec.transpose()
                 << std::endl;
-    file_result << std::fixed << setprecision(5) << "F1: " << f1_vec.transpose()
-                << std::endl;
+    // file_result << std::fixed << setprecision(5) << "F1: " << f1_vec.transpose()
+    //            << std::endl;
     if (eva_mme) {
         file_result << std::fixed << setprecision(5) << "MME: " << mme_est << " " << mme_gt << " "
                     << min_abs_entropy << " " << max_abs_entropy << std::endl;
