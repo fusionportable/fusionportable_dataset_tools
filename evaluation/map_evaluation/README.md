@@ -1,4 +1,5 @@
 # Cloud Map Evaluation
+
 Point cloud map evaluation library  for the [FusionPortable](https://ram-lab.com/file/site/fusionportable/dataset/fusionportable/) dataset.  The Metrics include RMSE, Accuracy(mean error), Precision(standard deviation), Completeness(overlap ratio), Chamfer distance(CD) and F1-score at all levels of `1/2/5/10/20`cm.  For those do not have ground truth maps, we use Mean Map Entropy (MME).
 
 **Author**: Xiangcheng HU, [Jiaojian Hao](https://github.com/gogojjh).
@@ -116,7 +117,7 @@ we can use [CloudCompare](https://github.com/CloudCompare/CloudCompare) to align
 
 ![image-20230106135937336](./README/image6.png)
 
-![image-20230106140017020](./README/image-20230106140017020.png)
+![image-20230106140017020](./README/image8.png)
 
 ### What's the difference between raw rendered map and inlier rendered map?
 
