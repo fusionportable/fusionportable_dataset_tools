@@ -21,6 +21,7 @@ int CloudMapEva::process() {
     std::cout << "2. estimate normal: " << (t2 - t1) / 1000.0 << " [s]" << std::endl;
 
     if (param_.evaluate_mme_) {
+        // calculate the entropy of the map with a radius of 0.2
         double radius = 0.2;
         mme_est = ComputeMeanMapEntropy(map_3d_, est_entropies, radius);
 
@@ -34,6 +35,7 @@ int CloudMapEva::process() {
         //        min_abs_entropy = std::fabs(*std::max_element(non_zero_combined.begin(), non_zero_combined.end()));
         //        std::cout << "MAX MIN ENTROPY: " << max_abs_entropy << " " << min_abs_entropy << std::endl;
         if (param_.evaluate_gt_mme_) {
+            // calculate MME for ground truth map
             mme_gt = ComputeMeanMapEntropy(gt_3d_, gt_entropies, radius);
             std::cout << "MME EST-GT: " << mme_est << " " << mme_gt << std::endl;
         } else {
@@ -833,6 +835,8 @@ CloudMapEva::ComputeMeanMapEntropy(const std::shared_ptr<open3d::geometry::Point
     open3d::geometry::KDTreeFlann kdtree;
     kdtree.SetGeometry(*pointcloud);
 
+
+// Sequential loop
 /*    for (size_t i = 0; i < pointcloud->points_.size(); ++i) {
         std::vector<int> indices;
         std::vector<double> distances;

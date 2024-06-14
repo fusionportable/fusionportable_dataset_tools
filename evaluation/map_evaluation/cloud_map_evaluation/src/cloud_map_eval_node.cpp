@@ -1,13 +1,17 @@
 #include "cloud_map_eval.h"
 #include <filesystem>
 
-
-/**
- * for map evaluation, we have several metrics
- * 1. accuracy p: rmse mean_value
- * 2. completeness r: overlap ratio
- * 3. F1 score: 2pr/(p+r)
+/* author: xchu
+ * time: 2021.01.21
+ * email: xhubd@connnect.ust.hk
+ * 
+ * This is a simple example to show how to use the cloud map evaluation class.
+ * The evaluation class is used to evaluate the accuracy of the estimated map.
+ * The evaluation metrics include: RMSE, MME, etc.
  */
+
+
+
 int main(int argc, char **argv) {
     bool save_immediate_result = true;
     std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
@@ -15,7 +19,7 @@ int main(int argc, char **argv) {
     // evaluation method, 0: point-to-point icp 1: point-to-plane icp 2: GICP
     int method = 2;
     // max correspondence pairs distance for icp knn search correspondence
-    // iteration(the search radius for kdtree)
+    // iteration (the search radius for kdtree)
     // double icp_max_distance = 1.0;  for large scale outdoor map
     double icp_max_distance = 0.5;
 
@@ -41,8 +45,8 @@ int main(int argc, char **argv) {
     results_path = est_folder + sequence_name + "/";
 
     // if you evaluate mme (cost too much time, do not recommend to use it)
-    // but you do not have ground truth map, you can set evaluate_mme = true
     bool evaluate_mme = false;
+    // but you do not have ground truth map, you can set evaluate_mme = true
     bool evaluate_gt_mme = false;
     Param my_param(est_path, gt_path, results_path, initial_matrix, sequence_name,
                    method, icp_max_distance, accuracy_level,
