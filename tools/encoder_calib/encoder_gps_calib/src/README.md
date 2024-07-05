@@ -15,4 +15,4 @@ Notice:
 3. set the extrinsic between gps and wheel in "gps2wheel" and edit corresponding gps topic
 
 
-![alt text](pic/result.png)
+![alt text](result.png)
