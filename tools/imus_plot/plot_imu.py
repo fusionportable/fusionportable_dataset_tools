@@ -34,14 +34,13 @@ def plot_time_data(ax, data, data_type='angular_velocity'):
     colors = color_list[:3]
     for idx, (axis, mark, color) in enumerate(zip(['X', 'Y', 'Z'], ['.', '.', '.'], colors)):
         ax.plot(data['time'], 
-                data['{}'.format(data_type)][:, idx], mark,
+                data['{}'.format(data_type)][:, idx],
                 label=axis, color=color, markersize=4)
 
     ax.set_xlabel('Time [s]', fontsize=20)
     ax.set_ylabel('Angular Vel. [rad/s]' if data_type == 'angular_velocity' else 
                   'Linear Acc. [m/s²]', 
                   fontsize=20)
-    
     ax.grid(True, linestyle='--')
 
     current_xmin, current_xmax = ax.get_xlim()
@@ -50,6 +49,7 @@ def plot_time_data(ax, data, data_type='angular_velocity'):
         ax.set_ylim([-1.5, 3])  # Replace angular_velocity_range with your value
     elif data_type == 'linear_acceleration':
         ax.set_ylim([-12, 20])  # Replace linear_acceleration_range with your value
+    ax.tick_params(axis='both', which='major', labelsize=13)
 
 def plot_frequency_data(ax, data, data_type='angular_velocity'):
     colors = color_list[:3]
@@ -59,7 +59,7 @@ def plot_frequency_data(ax, data, data_type='angular_velocity'):
     for idx, (axis, mark, color) in enumerate(zip(['X', 'Y', 'Z'], ['.', '.', '.'], colors)):
         fft_vals = np.fft.rfft(data['{}'.format(data_type)][:, idx] - np.mean(data['{}'.format(data_type)][:, idx]))
         fft_freq = np.fft.rfftfreq(N, d=sampling_interval)
-        ax.plot(fft_freq, 2.0 / N * np.abs(fft_vals), mark, 
+        ax.plot(fft_freq, 2.0 / N * np.abs(fft_vals), 
                 label=axis, color=color, markersize=4)
 
     ax.set_xlabel('Frequency [Hz] (Angular Vel.)' if data_type == 'angular_velocity' else 
@@ -73,9 +73,10 @@ def plot_frequency_data(ax, data, data_type='angular_velocity'):
     ax.set_xlim(left=-3, right=current_xmax-3)
     if data_type == 'linear_acceleration':
         ax.legend(loc='upper right', fontsize=20, markerscale=4)
+    ax.tick_params(axis='both', which='major', labelsize=14)
 
 def process_and_plot_for_platform(directory, platform, seq):
-    fig, axs = plt.subplots(1, 4, figsize=(22, 3))  # 1 row, 4 columns for each platform
+    fig, axs = plt.subplots(1, 4, figsize=(22, 2.8))  # 1 row, 4 columns for each platform
     platform_data = {}
     for file_name in os.listdir(directory):
         if 'stim300' in file_name and file_name.startswith(platform) and file_name.endswith(".txt") and seq in file_name:
@@ -91,17 +92,17 @@ def process_and_plot_for_platform(directory, platform, seq):
             plot_frequency_data(axs[3], data, data_type='linear_acceleration')
 
     plt.tight_layout()
-    # plt.savefig(f'{directory}/../figure/{seq}_motion.png', bbox_inches='tight', format='png', dpi=300)
-    plt.show()
+    plt.savefig(f'{directory}/../figure/{seq}_motion.png', bbox_inches='tight', format='png', dpi=300)
+    # plt.show()
 
 def main():
     data_directory = os.path.join(FOLDER_PATH, 'example_data')
     print(f"Loading data from {data_directory}")
 
-    # platforms = ['handheld', 'legged', 'ugv', 'vehicle']
-    # seq_plot = ['handheld_room00', 'legged_grass00', 'ugv_parking00', 'vehicle_highway00']
-    platforms = ['handheld']
-    seq_plot = ['handheld_room00']
+    platforms = ['handheld', 'legged', 'ugv', 'vehicle']
+    seq_plot = ['handheld_room00', 'legged_grass00', 'ugv_parking00', 'vehicle_highway00']
+    # platforms = ['handheld']
+    # seq_plot = ['handheld_room00']
     for platform, seq in zip(platforms, seq_plot):
         process_and_plot_for_platform(data_directory, platform, seq)    
 
