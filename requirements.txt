@@ -7,3 +7,4 @@ open3d
 rosnumpy
 opencv-python
 matplotlib
+gdown
