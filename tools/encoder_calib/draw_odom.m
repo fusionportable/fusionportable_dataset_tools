@@ -2,9 +2,9 @@ clc; clear; close all;
 color_list = acquire_color_list();
 
 %%
-filename = 'RTK.txt';
-filename2 = 'CAD.txt';
-filename3 = 'Calibrated.txt';
+filename = 'example_data/ugv_parking00/RTK.txt';
+filename2 = 'example_data/ugv_parking00/CAD.txt';
+filename3 = 'example_data/ugv_parking00/Calibrated.txt';
 table_data = readtable(filename);
 table_data2 = readtable(filename2);
 table_data3 = readtable(filename3);
