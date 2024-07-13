@@ -17,13 +17,17 @@
 Please add this line in ```/etc/hosts```: ```143.89.6.5 www.ram-lab.com filebrowser.ram-lab.com``` to visit the dataset page. -->
 
 ## Installation
-Clone the Repo
+Clone the Repo only
+```
+git clone https://github.com/fusionportable/fusionportable_dataset_tools.git
+```
+Clone the Repo with submodules (including calibration_files and algorithms for experiments)
 ```
 git clone https://github.com/fusionportable/fusionportable_dataset_tools.git --recursive
-cd fusionportable_dataset_tools
 ```
 Setup the Python environment (tested on Python-3.9) or using Anaconda directly and run
 ```
+cd fusionportable_dataset_tools
 conda create -n fp_dataset python=3.9
 pip install -r requirements
 ```
