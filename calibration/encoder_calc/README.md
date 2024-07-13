@@ -21,7 +21,7 @@ This project is to calculate wheel encoder intrinsic(wheel radius and track) wit
 ### Results
 
 <p align="center">
-	<img src="media/result_trajectory_alignment.png" width="750" />
+	<img src="encoder_calc/media/result_trajectory_alignment.png" width="750" />
 </p>
 
 ## Contributors
