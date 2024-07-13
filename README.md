@@ -1,6 +1,7 @@
 # FusionPortable_dataset_tools
 
 ## News
+* (20240713) Provide usage example of running SLAM and calibration algorithms with our dataset.
 * (20240508) Groundtruth poses of all vehicle-related sequences are postprocessed: eliminate poses characterized by high uncertainty.
 * (20240422) Data can be downloaded from <a href="https://pan.baidu.com/s/1lZwK-TNrCyoyC9oWEs8jUg?pwd=byj8">Baidu Wang Pan</a> with the code <b>byj8</b>.
 * (20240414) All sequences, ground-truth trajectories, and ground-truth maps have been publicly released. If you find issues of GT trajectories and maps, please contact us or report <a href="https://github.com/fusionportable/fusionportable_dataset_tools/issues">here</a>.
@@ -50,7 +51,18 @@ pip install -r requirements
 
 2. Mapping Evaluation: click this [link](evaluation/map_evaluation) to try. 
 
-#### Usage of Applications
+#### Applications
+We have provided configuration files of running experiments with our dataset
+
+1. Visual SLAM: [DROID-SLAM](application/DROID-SLAM)
+
+#### Calibration Tools
+*Intrinsic Calibration*
+1. Wheel enoder calibration: [encoer_calc](calibration/encoder_calc/) 
+
+*Extrinsic Calibration*
+1. Camera-LiDAR calibration: [LCECalib](calibration/LCECalib)
+2. Camera-IMU, Multi-IMU calibration: [kalibr](calibration/kalibr)
 
 
 ## Some Issues with Dependencies
