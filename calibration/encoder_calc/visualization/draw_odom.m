@@ -2,9 +2,9 @@ clc; clear; close all;
 color_list = acquire_color_list();
 
 %% Set filename and load dasta
-filename = 'example_data/ugv_parking00/RTK.txt';
-filename2 = 'example_data/ugv_parking00/CAD.txt';
-filename3 = 'example_data/ugv_parking00/Calibrated.txt';
+filename = '../data/ugv_parking00/RTK.txt';
+filename2 = '../data/ugv_parking00/CAD.txt';
+filename3 = '../data/ugv_parking00/Calibrated.txt';
 table_data = readtable(filename);
 table_data2 = readtable(filename2);
 table_data3 = readtable(filename3);
