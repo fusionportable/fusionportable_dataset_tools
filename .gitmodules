@@ -4,3 +4,6 @@
 [submodule "application/DROID-SLAM"]
 	path = application/DROID-SLAM
 	url = git@github.com:fusionportable/DROID-SLAM.git
+[submodule "calibration/LCECalib"]
+	path = calibration/LCECalib
+	url = git@github.com:HKUSTGZ-IADC/LCECalib.git
