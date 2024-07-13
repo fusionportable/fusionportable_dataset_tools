@@ -42,9 +42,9 @@ pip install -r requirements
 1. Project undistorted point cloud onto image to verify the error in extrinsics: ```visualize_depthmap.ipynb```
 
 #### Usage of Evaluation Tools
-* Trajectory Evaluation
+1. Trajectory Evaluation
 
-* Mapping Evaluation
+2. Mapping Evaluation: click this [link](evaluation/map_evaluation) to try. 
 
 #### Usage of Applications
 
