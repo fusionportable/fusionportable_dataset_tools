@@ -7,3 +7,6 @@
 [submodule "calibration/LCECalib"]
 	path = calibration/LCECalib
 	url = git@github.com:HKUSTGZ-IADC/LCECalib.git
+[submodule "calibration/kalibr"]
+	path = calibration/kalibr
+	url = https://github.com/ethz-asl/kalibr
