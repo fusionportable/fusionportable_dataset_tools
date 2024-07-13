@@ -1,3 +1,6 @@
 [submodule "calibration_files"]
 	path = calibration_files
 	url = https://github.com/fusionportable/calibration_files.git
+[submodule "application/DROID-SLAM"]
+	path = application/DROID-SLAM
+	url = git@github.com:fusionportable/DROID-SLAM.git
