@@ -1,6 +1,6 @@
 # FusionPortable_dataset_tools
 
-## News
+## News :star:
 * (20240713) Provide usage example of running SLAM and calibration algorithms with our dataset.
 * (20240508) Groundtruth poses of all vehicle-related sequences are postprocessed: eliminate poses characterized by high uncertainty.
 * (20240422) Data can be downloaded from <a href="https://pan.baidu.com/s/1lZwK-TNrCyoyC9oWEs8jUg?pwd=byj8">Baidu Wang Pan</a> with the code <b>byj8</b>.
@@ -9,7 +9,7 @@
 * (20240408) The development tool has been initially released.
 * (20240407) Data can be downloaded from <a href="https://drive.google.com/drive/folders/1PYhnf3PlY5r0hbyzWDGTUTPxRMl6SYa-?usp=sharing">Google Drive</a>. 
 
-## Download Dataset
+## Download Dataset :fire:
 1. Please visit [FusionPortable dataset](https://fusionportable.github.io/dataset/fusionportable) and [FusionPortableV2_dataset](https://fusionportable.github.io/dataset/fusionportable_v2) to check and download data.
 2. Download the compressed rosbag.
 3. When finished, use the similar command ```7z l 20220216_garden_day.7z``` to extract data.
@@ -34,7 +34,8 @@ pip install -r requirements
 ```
 
 ## Usage
-#### Usage of Data-Loader-Related Functions
+### Parse ROS bag and Process Data :heart_eyes:
+**Data-Loader-Related Functions**
 1. Convert the raw rosbag into individual files: ```write_bag_to_data.ipynb```
 
 2. Convert the algorithms' results (i.e., R3LIVE, FAST-LIO2) stored as the rosbag into individual files: ```write_alg_bag_to_data.ipynb```
@@ -43,36 +44,35 @@ pip install -r requirements
 
 4. Generate depth map with respect to the frame_left camera for the depth evaluation purpose: ```write_depthmap_to_kitti360.ipynb```
 
-#### Usage of Tool Functions
+**Tool Functions**
 1. Project undistorted point cloud onto image to verify the error in extrinsics: ```visualize_depthmap.ipynb```
 
-#### Usage of Evaluation Tools
+**Evaluation Tools**
 1. Trajectory Evaluation
 
 2. Mapping Evaluation: click this [link](evaluation/map_evaluation) to try. 
 
-#### Applications
+### Applications :kissing_heart:
 We have provided configuration files of running experiments with our dataset
 
-*SLAM:*
+**SLAM**
   1. Visual SLAM: [DROID-SLAM](https://github.com/fusionportable/DROID-SLAM)
   2. Visual-Inertial SLAM: [VINS-Fusion](https://github.com/fusionportable/vins_fusion)
   2. LiDAR-Inertial SLAM: [FAST-LIO2](https://github.com/fusionportable/fastlio2)
 
-*Others:*
+**Others**
   1. Face and Vehicle Number Pravicy Protection: [Anonymizer](https://github.com/fusionportable/Anonymizer)
 
-#### Calibration Tools
-*Intrinsic Calibration:*
+### Calibration Tools :kissing_closed_eyes:
+**Intrinsic Calibration**
   1. IMU noise calibration: [Allen Variance Analysis](https://github.com/fusionportable/allan_variance_ros)
   2. Wheel enoder calibration: [encoer_calc](calibration/encoder_calc/)
 
-*Extrinsic Calibration:*
+**Extrinsic Calibration**
   1. Camera-LiDAR calibration: [LCECalib](https://github.com/HKUSTGZ-IADC/LCECalib)
   2. Camera-IMU, Multi-IMU calibration: [Kalibr](https://github.com/ethz-asl/kalibr)
 
-
-## Some Issues with Dependencies
+## Issues with Dependencies
 ##### 1. Something wrong with the ```ros_numpy```
 ```python
 File ~/anaconda3/envs/fp_dataset/lib/python3.9/site-packages/ros_numpy/point_cloud2.py:224
@@ -88,8 +88,10 @@ def get_xyz_points(cloud_array, remove_nans=True, dtype=np.float64):
 ## Contribution
 Please refer to [Contribution Guidance](doc/contribution.md) to make contributions to this project.
 
-## Inquiry
-Please feel free to contact Dr.Jianhao Jiao (jiaojh1994 at gmail.com) or Mr.Hexiang Wei (hweiak at connect.ust.hk) if you have any questions.
+## Inquiry :question:
+Please post issues or contact Dr.Jianhao Jiao (jiaojh1994 at gmail.com) or Mr.Hexiang Wei (hweiak at connect.ust.hk) if you have any questions.
+
+Your are also recommended to check our paper first: [FusionPortable V1](doc/paper_fusionportable_iros2022.pdf) and [FusionPortable V2](doc/paper_fusionportablev2.pdf).
 
 ## Citation
 ```
