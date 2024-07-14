@@ -94,6 +94,7 @@ Please post issues or contact Dr.Jianhao Jiao (jiaojh1994 at gmail.com) or Mr.He
 Your are also recommended to check our paper first: [FusionPortable V1](doc/paper_fusionportable_iros2022.pdf) and [FusionPortable V2](doc/paper_fusionportablev2.pdf).
 
 ## Citation
+If you find this paper or the toolbox useful in your project, please consider citing one of our papers.
 ```
 @misc{wei2024fusionportablev2,
   title={FusionPortableV2: A Unified Multi-Sensor Dataset for Generalized SLAM Across Diverse Platforms and Scalable Environments}, 
