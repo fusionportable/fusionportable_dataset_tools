@@ -54,15 +54,22 @@ pip install -r requirements
 #### Applications
 We have provided configuration files of running experiments with our dataset
 
-1. Visual SLAM: [DROID-SLAM](application/DROID-SLAM)
+*SLAM:*
+  1. Visual SLAM: [DROID-SLAM](https://github.com/fusionportable/DROID-SLAM)
+  2. Visual-Inertial SLAM: [VINS-Fusion](https://github.com/fusionportable/vins_fusion)
+  2. LiDAR-Inertial SLAM: [FAST-LIO2](https://github.com/fusionportable/fastlio2)
+
+*Others:*
+  1. Face and Vehicle Number Pravicy Protection: [Anonymizer](https://github.com/fusionportable/Anonymizer)
 
 #### Calibration Tools
-*Intrinsic Calibration*
-1. Wheel enoder calibration: [encoer_calc](calibration/encoder_calc/) 
+*Intrinsic Calibration:*
+  1. IMU noise calibration: [Allen Variance Analysis](https://github.com/fusionportable/allan_variance_ros)
+  2. Wheel enoder calibration: [encoer_calc](calibration/encoder_calc/)
 
-*Extrinsic Calibration*
-1. Camera-LiDAR calibration: [LCECalib](calibration/LCECalib)
-2. Camera-IMU, Multi-IMU calibration: [kalibr](calibration/kalibr)
+*Extrinsic Calibration:*
+  1. Camera-LiDAR calibration: [LCECalib](https://github.com/HKUSTGZ-IADC/LCECalib)
+  2. Camera-IMU, Multi-IMU calibration: [Kalibr](https://github.com/ethz-asl/kalibr)
 
 
 ## Some Issues with Dependencies

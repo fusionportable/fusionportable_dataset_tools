@@ -10,3 +10,18 @@
 [submodule "calibration/kalibr"]
 	path = calibration/kalibr
 	url = https://github.com/ethz-asl/kalibr
+[submodule "application/Anonymizer"]
+	path = application/Anonymizer
+	url = git@github.com:fusionportable/Anonymizer.git
+[submodule "VINS-Fusion"]
+	path = VINS-Fusion
+	url = git@github.com:fusionportable/vins_fusion.git
+[submodule "application/VINS-Fusion"]
+	path = application/VINS-Fusion
+	url = git@github.com:fusionportable/vins_fusion.git
+[submodule "application/FASTLIO2"]
+	path = application/FASTLIO2
+	url = git@github.com:fusionportable/fastlio2.git
+[submodule "calibration/allen_variance_ros"]
+	path = calibration/allen_variance_ros
+	url = git@github.com:fusionportable/allan_variance_ros.git
