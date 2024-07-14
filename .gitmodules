@@ -13,9 +13,6 @@
 [submodule "application/Anonymizer"]
 	path = application/Anonymizer
 	url = git@github.com:fusionportable/Anonymizer.git
-[submodule "VINS-Fusion"]
-	path = VINS-Fusion
-	url = git@github.com:fusionportable/vins_fusion.git
 [submodule "application/VINS-Fusion"]
 	path = application/VINS-Fusion
 	url = git@github.com:fusionportable/vins_fusion.git
