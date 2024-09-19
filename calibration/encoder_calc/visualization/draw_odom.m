@@ -16,13 +16,14 @@ data3 = parse_table_data(table_data3);
 %% Draw the trajectory
 figure(1); 
 hold on;
-plot3(data.x, data.y, data.z, 'Color', color_list(1, 1:3), 'LineWidth', 2, 'LineStyle', '-');
-plot3(data2.x, data2.y, data2.z, 'Color', color_list(2, 1:3), 'LineWidth', 2, 'LineStyle', '-');
-plot3(data3.x, data3.y, data3.z, 'Color', color_list(4, 1:3), 'LineWidth', 2, 'LineStyle', '--');
-plot3(0, 0, 0, 'd', 'Color', color_list(5, 1:3), 'MarkerSize', 20, 'MarkerFaceColor', color_list(5, 1:3));
+plot3(data.x, data.y, data.z, 'Color', color_list(2, 1:3), 'LineWidth', 3, 'LineStyle', '--');
+plot3(data2.x, data2.y, data2.z, 'Color', color_list(4, 1:3), 'LineWidth', 3, 'LineStyle', '-');
+plot3(data3.x, data3.y, data3.z, 'Color', color_list(1, 1:3), 'LineWidth', 3, 'LineStyle', '-');
+plot3(data.x(1), data.y(1), data.z(1)+10, 'pentagram', 'Color', color_list(5, 1:3), 'MarkerSize', 40, 'MarkerFaceColor', color_list(5, 1:3));
+plot3(data.x(end), data.y(end), data.z(end)+10, '^', 'Color', color_list(5, 1:3), 'MarkerSize', 30, 'MarkerFaceColor', color_list(5, 1:3));
 sprintf('t.secs>=%.9f and t.secs<=%.9f', data.time(1), data.time(end))
 
-legend({'Motion of INS', 'Motion of Encoders (Before Calib.)', 'Motion of Encoders (After Calib.)'}, 'Location', 'northeast', 'FontSize', 25,'fontname','Times New Roman');
+legend({'Motion of INS', 'Motion of Encoders (Before Calibration)', 'Motion of Encoders (After Calibration)', 'Start Point', 'End Point'}, 'Location', 'northwest', 'FontSize', 30,'fontname','Times New Roman');
 grid on; ax = gca; ax.GridLineStyle = '--'; ax.GridAlpha = 0.3; box on;
 set(gca, 'FontName', 'Times', 'FontSize', 25, 'LineWidth', 2);
 xlabel("X [m]"); ylabel("Y [m]"); zlabel("Z [m]");
