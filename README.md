@@ -31,10 +31,6 @@ Setup the Python environment (tested on Python-3.9) or using Anaconda directly a
 cd fusionportable_dataset_tools
 conda create -n fp_dataset python=3.9
 pip install -r requirements.txt
-cd /src/data_loader/ros_msg
-git clone https://github.com/eric-wieser/ros_numpy.git
-cd ros_numpy/
-python setup.py install
 ```
 
 ## Usage
