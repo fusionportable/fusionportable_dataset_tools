@@ -29,7 +29,7 @@ git clone https://github.com/fusionportable/fusionportable_dataset_tools.git --r
 Setup the Python environment (tested on Python-3.9) or using Anaconda directly and run
 ```
 cd fusionportable_dataset_tools
-conda create -n fp_dataset python=3.9
+conda create -n fp_dataset python=3.9.18
 pip install -r requirements.txt
 ```
 
