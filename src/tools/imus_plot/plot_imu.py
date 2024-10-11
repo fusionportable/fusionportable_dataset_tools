@@ -97,12 +97,13 @@ def process_and_plot_for_platform(directory, platform, seq):
 
 def main():
     data_directory = os.path.join(FOLDER_PATH, 'example_data')
+    os.makedirs(f'{data_directory}/../figure', exist_ok=True)
     print(f"Loading data from {data_directory}")
 
-    platforms = ['handheld', 'legged', 'ugv', 'vehicle']
-    seq_plot = ['handheld_room00', 'legged_grass00', 'ugv_parking00', 'vehicle_highway00']
-    # platforms = ['handheld']
-    # seq_plot = ['handheld_room00']
+    # platforms = ['handheld', 'legged', 'ugv', 'vehicle']
+    # seq_plot = ['handheld_room00', 'legged_grass00', 'ugv_parking00', 'vehicle_highway00']
+    platforms = ['handheld']
+    seq_plot = ['handheld_room00']
     for platform, seq in zip(platforms, seq_plot):
         process_and_plot_for_platform(data_directory, platform, seq)    
 
