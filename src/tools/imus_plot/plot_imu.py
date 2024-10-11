@@ -75,7 +75,7 @@ def plot_frequency_data(ax, data, data_type='angular_velocity'):
         ax.legend(loc='upper right', fontsize=20, markerscale=4)
     ax.tick_params(axis='both', which='major', labelsize=14)
 
-def process_and_plot_for_platform(directory, platform, seq):
+def process_and_plot_for_platform(directory, platform, seq, fig_directory):
     fig, axs = plt.subplots(1, 4, figsize=(22, 2.8))  # 1 row, 4 columns for each platform
     platform_data = {}
     for file_name in os.listdir(directory):
@@ -92,20 +92,21 @@ def process_and_plot_for_platform(directory, platform, seq):
             plot_frequency_data(axs[3], data, data_type='linear_acceleration')
 
     plt.tight_layout()
-    plt.savefig(f'{directory}/../figure/{seq}_motion.png', bbox_inches='tight', format='png', dpi=300)
-    # plt.show()
+    plt.savefig(f'{fig_directory}/{seq}_motion.png', bbox_inches='tight', format='png', dpi=300)
+    plt.show()
 
 def main():
     data_directory = os.path.join(FOLDER_PATH, 'example_data')
-    os.makedirs(f'{data_directory}/../figure', exist_ok=True)
+    fig_directory = f'{data_directory}/../figure'
+    os.makedirs(fig_directory, exist_ok=True)
     print(f"Loading data from {data_directory}")
 
-    # platforms = ['handheld', 'legged', 'ugv', 'vehicle']
-    # seq_plot = ['handheld_room00', 'legged_grass00', 'ugv_parking00', 'vehicle_highway00']
-    platforms = ['handheld']
-    seq_plot = ['handheld_room00']
+    platforms = ['handheld', 'legged', 'ugv', 'vehicle']
+    seq_plot = ['handheld_room00', 'legged_grass00', 'ugv_parking00', 'vehicle_highway00']
+    # platforms = ['handheld']
+    # seq_plot = ['handheld_room00']
     for platform, seq in zip(platforms, seq_plot):
-        process_and_plot_for_platform(data_directory, platform, seq)    
+        process_and_plot_for_platform(data_directory, platform, seq, fig_directory)    
 
 if __name__ == "__main__":
     main()
