@@ -32,11 +32,18 @@ cd fusionportable_dataset_tools
 conda create -n fp_dataset python=3.9.18
 pip install -r requirements.txt
 ```
+Integrate with your project
+```sh
+import os
+import sys
+sys.path.append('/path/fusionportable_dataset_tools')
+```
 
 ## Usage
 ### Parse ROS bag and Process Data :heart_eyes:
 **Data-Loader-Related Functions**
-1. Convert the raw rosbag into individual files: ```write_bag_to_data.ipynb```
+1. Convert the raw rosbag into individual files: 
+```write_bag_to_data.ipynb```
 
 2. Convert the algorithms' results (i.e., R3LIVE, FAST-LIO2) stored as the rosbag into individual files: ```write_alg_bag_to_data.ipynb```
 
@@ -45,7 +52,8 @@ pip install -r requirements.txt
 4. Generate depth map with respect to the frame_left camera for the depth evaluation purpose: ```write_depthmap_to_kitti360.ipynb```
 
 **Tool Functions**
-1. Project undistorted point cloud onto image to verify the error in extrinsics: ```visualize_depthmap.ipynb```
+1. Project undistorted point cloud onto image to verify the error in extrinsics: 
+```visualize_depthmap.ipynb```
 
 **Evaluation Tools**
 1. Trajectory Evaluation
@@ -96,13 +104,13 @@ Your are also recommended to check our paper first: [FusionPortable V1](doc/pape
 ## Citation
 If you find this paper or the toolbox useful in your project, please consider citing one of our papers.
 ```
-@misc{wei2024fusionportablev2,
-  title={FusionPortableV2: A Unified Multi-Sensor Dataset for Generalized SLAM Across Diverse Platforms and Scalable Environments}, 
-  author={Hexiang Wei and Jianhao Jiao and Xiangcheng Hu and Jingwen Yu and Xupeng Xie and Jin Wu and Yilong Zhu and Yuxuan Liu and Lujia Wang and Ming Liu},
+@article{wei2024fusionportablev2,
+  title={Fusionportablev2: A unified multi-sensor dataset for generalized slam across diverse platforms and scalable environments},
+  author={Wei, Hexiang and Jiao, Jianhao and Hu, Xiangcheng and Yu, Jingwen and Xie, Xupeng and Wu, Jin and Zhu, Yilong and Liu, Yuxuan and Wang, Lujia and Liu, Ming},
+  journal={The International Journal of Robotics Research},
+  pages={02783649241303525},
   year={2024},
-  eprint={2404.08563},
-  archivePrefix={arXiv},
-  primaryClass={cs.RO}
+  publisher={SAGE Publications Sage UK: London, England}
 }
 ```
 

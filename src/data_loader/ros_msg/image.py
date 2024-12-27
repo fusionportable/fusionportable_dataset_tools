@@ -51,6 +51,7 @@ class Image():
 			nsec = msg.header.stamp.nsecs
 			timestamps.append((sec, nsec))
 			frame_cnt += 1
+
 		timestamp_filename = os.path.join(output_path, 'timestamps.txt')
 		with open(timestamp_filename, 'w') as file:
 			for time in timestamps:
@@ -61,10 +62,16 @@ class Image():
 		filename = os.path.join(output_path, 'data', '{:06d}.png'.format(frame_cnt))
 		pil_img.save(filename)
 
+	def write_to_file_customize(self, pil_img, frame_cnt, output_path, suffix=''):
+		filename = os.path.join(output_path, '{:06d}{}'.format(frame_cnt, suffix))
+		pil_img.save(filename)
+
 if __name__ == '__main__':
 	print('[Test] Loading Outser messages...')
+	data_path = '/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_campus00'
 	ouster_nearir_image = Image(sensor_type='ouster', msg_type='sensor_msgs/Image')
-	bag = rosbag.Bag('/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_campus00/vehicle_campus00_refined_test.bag')
-	ouster_nearir_image.load_messages_write_to_file(bag=bag, \
-													output_path='/Rocket_ssd/dataset/FusionPortable_dataset_develop/sensor_data/data_refined/vehicle_campus00/raw_data/ouster/nearir_image', \
-													topic='/os_image_node/nearir_image')
+	bag = rosbag.Bag(os.paht.join(data_path, 'vehicle_campus00.bag'))
+	ouster_nearir_image.load_messages_write_to_file( \
+		bag=bag, \
+		output_path=os.paht.join(data_path, 'raw_data/ouster/nearir_image'), \
+		topic='/os_image_node/nearir_image')
