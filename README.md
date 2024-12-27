@@ -1,6 +1,7 @@
 # FusionPortable_dataset_tools
 
 ## News :star:
+* (20240926) Paper is accepted by IJRR.
 * (20240713) Provide usage example of running SLAM and calibration algorithms with our dataset.
 * (20240508) Groundtruth poses of all vehicle-related sequences are postprocessed: eliminate poses characterized by high uncertainty.
 * (20240422) Data can be downloaded from <a href="https://pan.baidu.com/s/1lZwK-TNrCyoyC9oWEs8jUg?pwd=byj8">Baidu Wang Pan</a> with the code <b>byj8</b>.
