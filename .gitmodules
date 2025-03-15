@@ -22,3 +22,6 @@
 [submodule "calibration/allen_variance_ros"]
 	path = calibration/allen_variance_ros
 	url = git@github.com:fusionportable/allan_variance_ros.git
+[submodule "evaluation/map_evaluation"]
+	path = evaluation/map_evaluation
+	url = https://github.com/JokerJohn/Cloud_Map_Evaluation
