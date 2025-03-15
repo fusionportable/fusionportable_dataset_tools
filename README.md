@@ -57,9 +57,9 @@ sys.path.append('/path/fusionportable_dataset_tools')
 ```visualize_depthmap.ipynb```
 
 **Evaluation Tools**
-1. Trajectory Evaluation
+1. Trajectory Evaluation: [EVO](https://github.com/MichaelGrupp/evo)
 
-2. Mapping Evaluation: click this [link](evaluation/map_evaluation) to try. 
+2. Mapping Evaluation: [Cloud_Map_Evaluation](https://github.com/JokerJohn/Cloud_Map_Evaluation) 
 
 ### Applications :kissing_heart:
 We have provided configuration files of running experiments with our dataset

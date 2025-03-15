@@ -25,3 +25,6 @@
 [submodule "evaluation/map_evaluation"]
 	path = evaluation/map_evaluation
 	url = https://github.com/JokerJohn/Cloud_Map_Evaluation
+[submodule "evaluation/evo"]
+	path = evaluation/evo
+	url = https://github.com/MichaelGrupp/evo
