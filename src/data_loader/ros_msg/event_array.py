@@ -37,7 +37,7 @@ class EventArray():
         np.savetxt(filename, np.array(event_list), fmt='%d.%09d %d %d %d')
 
     def write_timestamps_to_file(self, timestamps, output_path):
-        timestamp_filename = os.path.join(output_path, 'timestamp.txt')
+        timestamp_filename = os.path.join(output_path, 'timestamps.txt')
         np.savetxt(timestamp_filename, np.array(timestamps), fmt='%d.%09d')
 
 if __name__ == '__main__':

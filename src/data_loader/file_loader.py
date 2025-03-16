@@ -11,7 +11,7 @@ class FileLoader():
   def load_timestamp(self, file_path):
     with open(file_path, 'r') as file:
       timestamps_str = [line for line in file]
-    timestamps = np.array(timestamps_str, dtype=np.float64)
+    timestamps = np.array(timestamps_str, dtype=np.float64).tolist()
     return timestamps
 
   def load_odometry(self, file_path, traj_type='TUM'):
