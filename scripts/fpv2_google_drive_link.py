@@ -22,7 +22,7 @@ FILE_MAPPING['sensor_data'] = {
     'legged_room00.7z' : '1DmBNOgKETClwOQaO9lMoypKhyDjJqc8b',
     'legged_transition00.7z' : '1PP_MG6b14Ne_boRkcfaCtDn0KJFxbIDe',
     'legged_underground00.7z' : '1znfUKifWUN2jZbaEAMl65DiHCovbReTB',
-    'ugv_campus00.7z' : '1N3_JQwvk3VB1FwLitWfLL0GU2Qj45w1q',
+    'ugv_campus00.7z' : '1QIe__kDAorjqQ_C13DR3nts8yeNr2KDx',
     'ugv_campus01.7z' : '17mewakWMRY8pI4XbAEy45kK0sTDUGLfV',
     'ugv_parking00.7z' : '17pnn17Z0ms8qCYKC8VgJS5ypoS46lodA',
     'ugv_parking01.7z' : '1xA6vTnhdIf0BFG9_KL2oscAAUOL2L2VP',
