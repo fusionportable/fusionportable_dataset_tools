@@ -3,6 +3,7 @@ import os
 import subprocess
 from typing import List
 import gdown
+import shutil
 
 def parse_arguments():
     """Parse command line arguments."""
@@ -68,6 +69,18 @@ def decompress_and_clean(filename: str, dataset_dir: str, component: str):
     os.remove(filepath)
     print(f"✅ Removed archive {filename}")
 
+    base_name = os.path.splitext(filename)[0]
+    source_path = os.path.join(component_dir, base_name, f"{base_name}.bag")
+    try:
+        shutil.move(source_path, os.path.join(component_dir, f"{base_name}.bag"))
+        print(f"✅ Moved {base_name}.bag to {component_dir}")
+    except FileNotFoundError as e:
+        print(f"❌ Missing file/directory: {str(e)}")
+        raise
+    except OSError as e:
+        print(f"❌ File operation failed: {str(e)}")
+        print("Check if source directory contains unexpected files")
+        raise
 def process_dataset(version: str, data_types: List[str], dataset_dir: str, file_names: List[str]):
     """Main processing function for dataset download and extraction."""
 
