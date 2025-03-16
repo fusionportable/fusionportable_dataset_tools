@@ -28,3 +28,6 @@
 [submodule "evaluation/evo"]
 	path = evaluation/evo
 	url = https://github.com/MichaelGrupp/evo
+[submodule "3rdparty/event_camera_py"]
+	path = 3rdparty/event_camera_py
+	url = https://github.com/ros-event-camera/event_camera_py
