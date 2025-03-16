@@ -41,7 +41,23 @@ sys.path.append('/path/fusionportable_dataset_tools')
 ```
 
 ## Usage
-### Parse ROS bag and Process Data :heart_eyes:
+### 1. Download ROS bag :heart_eyes:
+```bash
+python scripts/download_fusionportable_dataset.py \
+    --version fpv2 \
+    --data_types sensor_data groundtruth \
+    --file_names handheld_room00.7z \
+    --dataset_dir ./data_FusionPortable
+```
+
+#### Parameters
+| Parameter       | Description                                  | Options                              |
+|-----------------|----------------------------------------------|--------------------------------------|
+| `--version`     | Dataset version to download                  | `fpv1`, `fpv2`                      |
+| `--data_types`  | Dataset components to download               | `sensor_data`, `groundtruth`, `calibration_files`, `all` |
+| `--dataset_dir` | Output directory for downloaded data         | Any valid path (default: `data_FusionPortable`) |
+
+### 2. Parse ROS bag and Process Data :heart_eyes:
 **Data-Loader-Related Functions**
 1. Convert the raw rosbag into individual files: 
 ```write_bag_to_data.ipynb```
@@ -61,7 +77,7 @@ sys.path.append('/path/fusionportable_dataset_tools')
 
 2. Mapping Evaluation: [Cloud_Map_Evaluation](https://github.com/JokerJohn/Cloud_Map_Evaluation) 
 
-### Applications :kissing_heart:
+### 3. Applications :kissing_heart:
 We have provided configuration files of running experiments with our dataset
 
 **SLAM**

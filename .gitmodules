@@ -34,3 +34,6 @@
 [submodule "3rdparty/event_camera_renderer"]
 	path = 3rdparty/event_camera_renderer
 	url = https://github.com/ros-event-camera/event_camera_renderer/
+[submodule "3rdparty/pybind11_catkin"]
+	path = 3rdparty/pybind11_catkin
+	url = https://github.com/wxmerkt/pybind11_catkin/
