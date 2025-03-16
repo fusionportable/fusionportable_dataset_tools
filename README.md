@@ -57,6 +57,20 @@ python scripts/download_fusionportable_dataset.py \
 | `--data_types`  | Dataset components to download               | `sensor_data`, `groundtruth`, `calibration_files`, `all` |
 | `--dataset_dir` | Output directory for downloaded data         | Any valid path (default: `data_FusionPortable`) |
 
+After download, the dataset directory will contain:
+```bash
+dataset_dir/
+├── sensor_data/
+│   ├── vehicle_tunnel00.bag
+│   ├── vehicle_street00.bag
+│   └── ... 
+├── groundtruth/
+│   └── map
+│   └── traj
+└── calibration_files/
+    └── 20230912_calib/
+```
+
 ### 2. Parse ROS bag and Process Data :heart_eyes:
 **Data-Loader-Related Functions**
 1. Convert the raw rosbag into individual files: 
