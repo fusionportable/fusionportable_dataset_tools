@@ -1,4 +1,37 @@
 import numpy as np
+from PIL import Image
+from IPython.display import display
+
+def display_images_horizontally(img_fl, img_fr, img_el, img_er):
+    """Display four images in a single row with consistent alignment
+    
+    Args:
+        img_fl: Front-left frame camera image (PIL.Image)
+        img_fr: Front-right frame camera image (PIL.Image)
+        img_el: Event-left camera image (PIL.Image)
+        img_er: Event-right camera image (PIL.Image)
+    """
+    # Validate all images exist
+    image_list = [img_fl, img_fr, img_el, img_er]
+    if any(img is None for img in image_list):
+        print("Skipping display due to missing image(s)")
+        return
+
+    # Calculate composite dimensions
+    total_width = sum(img.width for img in image_list)
+    max_height = max(img.height for img in image_list)
+    
+    # Create composite canvas (white background)
+    composite = Image.new('RGB', (total_width, max_height), color=(255, 255, 255))
+    
+    # Paste images with bottom alignment
+    x_offset = 0
+    for img in image_list:
+        composite.paste(img, (x_offset, max_height - img.height))  # Bottom-aligned
+        x_offset += img.width
+
+    # Display final composite
+    display(composite)
 
 def find_closest_element_sorted(sorted_array, target):
 	"""
