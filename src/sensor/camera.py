@@ -88,7 +88,7 @@ class Camera:
     if p_C[2] <= 0.0:
         return (False, u_C)
     inv_z = 1.0 / p_C[2]
-    u_C = inv_z * (self.K @ p_C)[:2]
+    u_C = np.floor(inv_z * (self.K @ p_C)[:2])
     if (u_C[0] >= self.width or u_C[1] >= self.height or u_C[0] < 0 or u_C[1] < 0):
       return (False, u_C)
     else:

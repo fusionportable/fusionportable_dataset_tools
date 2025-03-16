@@ -3,6 +3,7 @@
 import cv2
 import numpy as np
 from camera import Camera
+import math
 
 class CameraPinhole(Camera):
   def __init__(self, frame_id, width, height, dataset_name, camera_name, distortion_model, K, D, Rect, P):
@@ -12,6 +13,34 @@ class CameraPinhole(Camera):
     undistorted_image = cv2.undistort(image, self.K, self.D)
     return undistorted_image
   
+  def undistort_pixel(self, pixel):
+      """
+      Undistorts a pixel coordinate using camera intrinsics and distortion coefficients
+      
+      Args:
+          pixel: Tuple/list of (u, v) coordinates
+          K: Camera matrix (3x3 numpy array)
+          D: Distortion coefficients (k1, k2, p1, p2[, k3[, k4, k5, k6]])
+          
+      Returns:
+          Tuple of (u_undist, v_undist) corrected coordinates
+      """
+      # Convert input to OpenCV-friendly format
+      points = np.array([[pixel]], dtype=np.float32)
+      
+      # Undistort the points
+      undistorted_points = cv2.undistortPoints(
+          points, 
+          self.K, 
+          self.D, 
+          None,  # No rectification matrix
+          self.K      # Use original camera matrix for output
+      )
+      
+      # Extract and return the undistorted coordinates
+      u, v = undistorted_points[0][0]
+      return (math.floor(u), math.floor(v))
+
 def test_main():
   """Main function to test the Camera class."""
   # Create a pinhole camera model
