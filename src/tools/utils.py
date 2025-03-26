@@ -1,5 +1,5 @@
 import numpy as np
-from PIL import Image
+from PIL import Image as PIL_Image
 from IPython.display import display
 
 def display_images_horizontally(img_fl, img_fr, img_el, img_er):
@@ -22,7 +22,7 @@ def display_images_horizontally(img_fl, img_fr, img_el, img_er):
     max_height = max(img.height for img in image_list)
     
     # Create composite canvas (white background)
-    composite = Image.new('RGB', (total_width, max_height), color=(255, 255, 255))
+    composite = PIL_Image.new('RGB', (total_width, max_height), color=(255, 255, 255))
     
     # Paste images with bottom alignment
     x_offset = 0

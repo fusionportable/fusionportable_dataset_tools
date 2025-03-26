@@ -59,7 +59,7 @@ class Image():
 		return len(timestamps)
 
 	def write_to_file(self, pil_img, frame_cnt, output_path):
-		filename = os.path.join(output_path, 'data', '{:06d}.png'.format(frame_cnt))
+		filename = os.path.join(output_path, 'data', '{:06d}.jpg'.format(frame_cnt))
 		pil_img.save(filename)
 
 	def write_to_file_customize(self, pil_img, frame_cnt, output_path, suffix=''):
