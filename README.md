@@ -1,6 +1,7 @@
 # FusionPortable_dataset_tools
 
 ## News :star:
+* (20250410) Some rosbags are extracted as individual files and converted into the KITTI format. Click [here](https://drive.google.com/drive/folders/1Djen47OdChkNecymBOZjKtr3F5JOS9T5?usp=drive_link) to try.
 * (20240926) Paper is accepted by IJRR.
 * (20240713) Provide usage example of running SLAM and calibration algorithms with our dataset.
 * (20240508) Groundtruth poses of all vehicle-related sequences are postprocessed: eliminate poses characterized by high uncertainty.
